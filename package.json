@@ -1,0 +1,19 @@
+{
+  "name": "blood-donors-project",
+  "version": "1.0.0",
+  "description": "The quest is to build a blood donor application.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/laurentiu-neciu23/blood-donors-project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/laurentiu-neciu23/blood-donors-project/issues"
+  },
+  "homepage": "https://github.com/laurentiu-neciu23/blood-donors-project#readme"
+}
