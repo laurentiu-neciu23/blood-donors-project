@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+
 
 class App extends Component {
 
@@ -33,7 +38,23 @@ class App extends Component {
     return (
       <div className="App">
         <div className="text-box">
-          <p className="text-justify">Ambitioni dedisse scripsisse iudicaretur. Cras mattis iudicium purus sit amet fermentum. Donec sed odio operae, eu vulputate felis rhoncus. Praeterea iter est quasdam res quas ex communi. At nos hinc posthac, sitientis piros Afros. Petierunt uti sibi concilium totius Galliae in diem certam indicere. Cras mattis iudicium purus sit amet fermentum.</p>
+        <Typography variant="h5" component="h3">
+          Welcome to Blood Donor Project.
+        </Typography>
+        <Typography component="p">
+          This is a project in which you can donate blood and do some rad shit dude or dudette. <br/>
+          Doing this, you will save people and increase your morality also you <br/>
+          get some RATB benefits.
+        </Typography>
+        <Button variant="contained" size="medium" color="default">
+          Register a direct account.
+        </Button>
+        <Button variant="contained" size="medium" color="primary">
+          Register an account with Facebook.
+        </Button>
+        <Button variant="contained" size="medium" color="secondary">
+          Register an account with Google.
+        </Button>
         </div>
         <div className="left-box">
         <div className="spinner-container">
@@ -55,7 +76,17 @@ class App extends Component {
                 <input type="checkbox" className="form-check-input" id="exampleCheck1"/>
                 <label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
               </div>
-              <button type="submit" className="btn btn-primary">Submit</button>
+              <div className="button-container">
+                <Button variant="contained" size="small" color="default" >
+                  Login
+              </Button>
+              <Button variant="contained" size="small" color="primary" >
+                  Facebook
+              </Button>
+              <Button variant="contained" size="small" color="secondary">
+                  Google
+              </Button>
+             </div>
           </form></div>
         </div>
 

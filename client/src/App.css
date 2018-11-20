@@ -5,20 +5,37 @@ body {
 .text-box{
   position:absolute;
   border-radius: 10%;
-  top: 11%;
-  left: 56%;
+  top: 10%;
+  left: 55%;
   width: 30%;
   height: 79%;
-  border: dotted;
   text-align: center;
   font-size: 15px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+  padding: 20px;
+}
+
+.text-box::after{
+  content: "";
+  background-color:rgba(153, 193, 226, 0.753);
+  filter: blur(2px);
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;
+  border-radius: 10%;
 }
 
 .left-box{
   position:absolute;
   border-radius: 10%;
-  top: 11%;
-  left: 11%;
+  top: 10%;
+  left: 15%;
   width: 30%;
   height: 79%;
   display:inline-block;
@@ -52,6 +69,16 @@ body {
   top: 7%;
   left: 40%;
   font-size: 58px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+.centered-button {
+  left: 8%;
 }
 
 .spinner {
