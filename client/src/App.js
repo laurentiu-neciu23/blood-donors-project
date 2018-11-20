@@ -5,6 +5,11 @@ import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import AnotherComponent from './AnotherComponent';
+import { CSSTransition } from "react-transition-group";
+import { NotificationManager, NotificationContainer} from "react-notifications";
+import 'react-notifications/lib/notifications.css';
 
 
 class App extends Component {
@@ -12,31 +17,14 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      numeleMeu: "Despacito"
     };
-    this.changeNameToSomeOtherName = this.changeNameToSomeOtherName.bind(this)
-    this.changeMyName = this.changeMyName.bind(this)
-  }
-
-
-  changeNameToSomeOtherName() {
-    this.setState(state => ({
-      numeleMeu: "Ana"
-    }));
-  }
-
-  changeMyName(event) {
-
-    var value = event.target.value
-
-    this.setState(state => ({
-      numeleMeu: value
-    }))
   }
 
   render() {
     return (
       <div className="App">
+        <CSSTransition in={true} appear={true} exit={true} timeout={1000} classNames="fade">
+
         <div className="text-box">
         <Typography variant="h5" component="h3">
           Welcome to Blood Donor Project.
@@ -49,13 +37,16 @@ class App extends Component {
         <Button variant="contained" size="medium" color="default">
           Register a direct account.
         </Button>
-        <Button variant="contained" size="medium" color="primary">
+        <Button variant="contained" size="medium" color="primary" onClick={() => NotificationManager.success('Success message', 'Title here')}>
           Register an account with Facebook.
         </Button>
         <Button variant="contained" size="medium" color="secondary">
           Register an account with Google.
         </Button>
         </div>
+        </CSSTransition>
+        <CSSTransition in={true} appear={true} exit={true} timeout={300} classNames="fade">
+
         <div className="left-box">
         <div className="spinner-container">
           <span className="spinner"></span>
@@ -77,9 +68,13 @@ class App extends Component {
                 <label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
               </div>
               <div className="button-container">
-                <Button variant="contained" size="small" color="default" >
-                  Login
-              </Button>
+
+                <Link to="/dashboard">
+                  <Button variant="contained" size="small" color="default" >
+                      Login
+                  </Button>
+                </Link>
+
               <Button variant="contained" size="small" color="primary" >
                   Facebook
               </Button>
@@ -89,9 +84,11 @@ class App extends Component {
              </div>
           </form></div>
         </div>
+        </CSSTransition>
+
+        <NotificationContainer />
 
       </div>
-
 
     );
   }

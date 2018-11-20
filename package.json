@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/laurentiu-neciu23/blood-donors-project/issues"
   },
-  "homepage": "https://github.com/laurentiu-neciu23/blood-donors-project#readme"
+  "homepage": "https://github.com/laurentiu-neciu23/blood-donors-project#readme",
+  "dependencies": {
+    "react-router-dom": "^4.3.1"
+  }
 }
