@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
-import AnotherComponent from './AnotherComponent';
+import AnotherComponent from './Main';
 import { CSSTransition } from "react-transition-group";
 import { NotificationManager, NotificationContainer} from "react-notifications";
 import 'react-notifications/lib/notifications.css';
@@ -27,7 +27,7 @@ class App extends Component {
 
         <div className="text-box">
         <Typography variant="h5" component="h3">
-          Welcome to Blood Donor Project.
+          <h5 style={{textAlign: "center"}}>Blood Donor Project</h5>
         </Typography>
         <Typography component="p">
           This is a project in which you can donate blood and do some rad shit dude or dudette. <br/>

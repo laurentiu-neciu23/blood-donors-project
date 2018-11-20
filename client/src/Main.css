@@ -1,0 +1,29 @@
+.dashboard {
+    position: absolute;
+    display: flex;
+    width: 25%;
+    height: 100%;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    flex-basis: 0%;
+    left: 0%;
+    top: 0%;
+    background: black;
+}
+
+
+.fade-appear {
+    opacity: 0;
+    z-index: 1;
+    transform: translateY(-10px) scale(0.95)
+  }
+  
+  .fade-appear.fade-appear-active {
+    opacity: 1;
+    transform: translateY(0px) scale(1);
+    transition: transform 300ms ease-in-out, opacity 300ms linear;
+  }
+  
+  .fade-enter-done {
+    transform: translateY(0px) scale(1);
+  }
