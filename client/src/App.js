@@ -22,72 +22,57 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <CSSTransition in={true} appear={true} exit={true} timeout={1000} classNames="fade">
+        <div className="account-flex account-position">
+          <div className="account-selection-flex account-selection-position">
+            <Button color="default" className="MuiButton-root-1 button-style selection-button selection-button-left">
+              Login
+            </Button>
 
-        <div className="text-box">
-        <Typography variant="h5" component="h3">
-          Welcome to Blood Donor Project.
-        </Typography>
-        <Typography component="p">
-          This is a project in which you can donate blood and do some rad shit dude or dudette. <br/>
-          Doing this, you will save people and increase your morality also you <br/>
-          get some RATB benefits.
-        </Typography>
-        <Button variant="contained" size="medium" color="default">
-          Register a direct account.
-        </Button>
-        <Button variant="contained" size="medium" color="primary" onClick={() => NotificationManager.success('Success message', 'Title here')}>
-          Register an account with Facebook.
-        </Button>
-        <Button variant="contained" size="medium" color="secondary">
-          Register an account with Google.
-        </Button>
-        </div>
-        </CSSTransition>
-        <CSSTransition in={true} appear={true} exit={true} timeout={300} classNames="fade">
+            <Button color="default" className="MuiButton-root-1 button-style selection-button selection-button-right">
+              Register
+            </Button>
+          </div>
+          <div className="login-container">
+            <div className="form-container">
+              <form>
+                <div className="form-group">
+                  <label for="exampleInputEmail1" className="text-style">Email address</label>
+                  <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"/>
+                </div>
+                <div className="form-group">
+                  <label for="exampleInputPassword1">Password</label>
+                  <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password"/>
+                </div>
+                  <Button color="default" className="MuiButton-root-1 button-style confirm-button">
+                  Login
+                </Button>
+              </form>
+            </div>
+          </div>
 
-        <div className="left-box">
-        <div className="spinner-container">
-          <span className="spinner"></span>
-        </div>
+          <div className="login-container">
+            <div className="form-container">
+              <Typography>
+                Also you can sign up with:
+              </Typography>
 
-        <div className="jumbotron">
-          <form>
-              <div className="form-group">
-                <label htmlFor="exampleInputEmail1">Email address</label>
-                <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"/>
-                <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
+              <div className="foreign-button-flex foreign-button-position">
+
               </div>
-              <div className="form-group">
-                <label htmlFor="exampleInputPassword1">Password</label>
-                <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password"/>
-              </div>
-              <div className="form-group form-check">
-                <input type="checkbox" className="form-check-input" id="exampleCheck1"/>
-                <label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
-              </div>
-              <div className="button-container">
+            </div>
 
-                <Link to="/dashboard">
-                  <Button variant="contained" size="small" color="default" >
-                      Login
-                  </Button>
-                </Link>
+          </div>
 
-              <Button variant="contained" size="small" color="primary" >
-                  Facebook
-              </Button>
-              <Button variant="contained" size="small" color="secondary">
-                  Google
-              </Button>
-             </div>
-          </form></div>
         </div>
-        </CSSTransition>
 
-        <NotificationContainer />
+        <div className="account-flex description-position">
+          <div className="spinner-container"></div>
+            <div className="spinner">
 
-      </div>
+            </div>
+          </div>
+
+        </div>
 
     );
   }
