@@ -6,7 +6,6 @@ import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
-import AnotherComponent from './AnotherComponent';
 import { CSSTransition } from "react-transition-group";
 import { NotificationManager, NotificationContainer} from "react-notifications";
 import 'react-notifications/lib/notifications.css';

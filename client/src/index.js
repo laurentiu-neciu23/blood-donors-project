@@ -4,16 +4,16 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter, Route, Switch} from 'react-router-dom'
-import AnotherComponent from './AnotherComponent'
+import Main from './Main'
 
 
 ReactDOM.render((
     <BrowserRouter>
       <div>
           <Route exact path="/" component={App} />
-          <Route exact path="/dashboard" component={AnotherComponent} />
+          <Route exact path="/dashboard" component={Main} />
       </div>
-      
+
     </BrowserRouter>
   ), document.getElementById('root'))
 
