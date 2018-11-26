@@ -9,18 +9,22 @@ input:-webkit-autofill {
   position: absolute;
   top: 20%;
   left: 55%;
-  width: 20%;
-  height: 50%;
 }
 
 .description-position {
   position: absolute;
   top: 20%;
   left: 25%;
-  width: 20%;
-  height: 50%;
-  border: dotted;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  display: flex;
+  background-color: rgba(235, 234, 245, 0.9);
+  border-radius: 5%;
+  box-shadow: 1px 0px 0px 0px;
+  border: 1px solid;
+  padding: 10px;
 }
+
 
 .account-flex {
   display: flex;
@@ -83,7 +87,6 @@ input:-webkit-autofill {
   border-radius: 10px;
 }
 
-
 .MuiButton-root-1.button-style {
   background-color: rgb(255, 255, 255);
 }
@@ -93,18 +96,29 @@ input:-webkit-autofill {
   border-bottom: solid rgb(0, 0, 0) 2px;
 }
 
+.presentation-text {
+  position: relative;
+  height: 300px;
+  width: 250px;
+  overflow: hidden;
+  text-align: justify;
+  border: solid rgb(146, 146, 146) 1px;
+  border-radius: 10px;
+  padding: 12px;
+}
+
 .spinner-container {
   position: relative;
-  width: 100%;
-  height: 30%;
-  background-color:  rgba(235, 234, 245, 0.9);
+  width: 250px;
+  height: 120px;
+  display: flex;
+  justify-content: center;
 }
 
 .spinner {
   position: absolute;
-  left: 40%;
-  top: 4%;
-  font-size: 62px;
+  font-size: 7vh;
+  transform: translateY(5vh)
 }
 
 .spinner:before, .spinner:after {
