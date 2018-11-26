@@ -13,7 +13,7 @@ ReactDOM.render((
           <Route exact path="/" component={App} />
           <Route exact path="/dashboard" component={Main} />
       </div>
-      
+
     </BrowserRouter>
   ), document.getElementById('root'))
 

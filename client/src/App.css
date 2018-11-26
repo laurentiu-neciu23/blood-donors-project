@@ -1,90 +1,134 @@
 body {
-  font-size: 10px;
+  font-size: 14px;
+}
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px white inset;
 }
 
-.text-box{
-  position:absolute;
-  border-radius: 10%;
-  top: 10%;
+.account-position {
+  position: absolute;
+  top: 20%;
   left: 55%;
-  width: 30%;
-  height: 79%;
-  text-align: center;
-  font-size: 15px;
+}
+
+.foreign-login-button-pannel {
+  display: flex;
+}
+
+.foreign-login-button-style {
+  margin: 10px !important;
+}
+
+.description-position {
+  position: absolute;
+  top: 20%;
+  left: 25%;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  display: flex;
+  background-color: rgba(235, 234, 245, 0.9);
+  border-radius: 5%;
+  box-shadow: 1px 0px 0px 0px;
+  border: 1px solid;
+  padding: 10px;
+}
+
+
+.account-flex {
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
-  justify-content: space-evenly;
-  text-align: justify;
-  padding: 20px;
+  justify-content: flex-start;
 }
 
-.text-box::after{
-  content: "";
-  background-color:rgba(153, 226, 204, 0.753);
-  filter: blur(2px);
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  position: absolute;
+.account-position::after {
   z-index: -1;
-  border-radius: 10%;
-}
-
-.left-box{
-  position:absolute;
-  border-radius: 10%;
-  top: 10%;
-  left: 15%;
-  width: 30%;
-  height: 79%;
-  display:inline-block;
-}
-
-.left-box::after {
-  content: "";
-  background-color:rgba(153, 226, 204, 0.753);
-  filter: blur(2px);
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
+  content: '';
   position: absolute;
-  z-index: -1;
-  border-radius: 10%;
-
+  width: 100%;
+  height: 100%;
+  background-color: rgba(235, 234, 245, 0.9);
+  border-radius: 5%;
+  box-shadow: 1px 0px 0px 0px;
+  border: 1px solid;
+  filter: blur(1px)
 }
 
-.jumbotron {
+.account-selection-flex {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+.form-container {
+  border: solid rgb(146, 146, 146) 1px;
+  border-radius: 10px;
+  padding: 12px;
+}
+
+.login-container {
+  padding: 16px;
+}
+
+.account-selection-position {
   position: relative;
-  top: 58%;
-  left: 50%;
-  height: 60%;
-  transform: translate(-50%,-50%);
-  background-color: inherit;
+  top: 0%;
+  width: 100%;
+  height: 10%;
+}
+
+.MuiButton-root-1.selection-button-right {
+  border-top-right-radius: 10px;
+}
+.MuiButton-root-1.selection-button-left {
+  border-top-left-radius: 10px;
+}
+
+.selection-button {
+  position: relative;
+  width: 50%;
+  box-shadow: 0px 1px 1px 0px
+}
+.confirm-button {
+  position: relative;
+  width: 100%;
+  border-radius: 10px;
+}
+
+.MuiButton-root-1.button-style {
+  background-color: rgb(255, 255, 255);
+}
+
+.MuiButton-root-1.button-style:hover {
+  background-color: white;
+  border-bottom: solid rgb(0, 0, 0) 2px;
+}
+
+.presentation-text {
+  position: relative;
+  height: 300px;
+  width: 250px;
+  overflow: hidden;
+  text-align: justify;
+  border: solid rgb(146, 146, 146) 1px;
+  border-radius: 10px;
+  padding: 12px;
 }
 
 .spinner-container {
-  position: absolute;
-  top: 7%;
-  left: 40%;
-  font-size: 58px;
-}
-
-.button-container {
+  position: relative;
+  width: 250px;
+  height: 120px;
   display: flex;
-  justify-content: space-between;
-  flex-direction: row;
-}
-
-.centered-button {
-  left: 8%;
+  justify-content: center;
 }
 
 .spinner {
-  position: relative;
+  position: absolute;
+  font-size: 7vh;
+  transform: translateY(5vh)
 }
+
 .spinner:before, .spinner:after {
   content: "";
   position: relative;
@@ -142,7 +186,7 @@ body {
 
 .fade-exit.fade-exit-active {
   opacity: 0;
-  transition: opacity 600ms linear; 
+  transition: opacity 600ms linear;
 }
 
 .fade-exit-done {
