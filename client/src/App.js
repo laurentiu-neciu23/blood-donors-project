@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
@@ -9,6 +8,8 @@ import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
 import { NotificationManager, NotificationContainer} from "react-notifications";
 import 'react-notifications/lib/notifications.css';
+import LoginForm from './LoginForm';
+import RegistrationForm from './RegistrationForm';
 
 
 class App extends Component {
@@ -16,38 +17,52 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      visible: "login"
     };
+
+    this.onClickLogin = this.onClickLogin.bind(this)
+    this.onClickRegister = this.onClickRegister.bind(this)
+  }
+
+  onClickRegister() {
+    this.setState(
+      {
+        visible: "register"
+      }
+    )
+  }
+
+  onClickLogin() {
+    this.setState(
+      {
+        visible: "login"
+      }
+    )
   }
 
   render() {
+    let form;
+
+    if(this.state.visible === "login") {
+      form = <LoginForm/>
+    }else{
+      form = <RegistrationForm/>
+    }
+
     return (
       <div className="App">
         <div className="account-flex account-position">
           <div className="account-selection-flex account-selection-position">
-            <Button color="default" className="MuiButton-root-1 button-style selection-button selection-button-left">
+            <Button color="default" className="MuiButton-root-1 button-style selection-button selection-button-left" onClick={this.onClickLogin}>
               Login
             </Button>
 
-            <Button color="default" className="MuiButton-root-1 button-style selection-button selection-button-right">
+            <Button color="default" className="MuiButton-root-1 button-style selection-button selection-button-right" onClick={this.onClickRegister}>
               Register
             </Button>
           </div>
           <div className="login-container">
-            <div className="form-container">
-              <form>
-                <div className="form-group">
-                  <label for="exampleInputEmail1" className="text-style">Email address</label>
-                  <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"/>
-                </div>
-                <div className="form-group">
-                  <label for="exampleInputPassword1">Password</label>
-                  <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password"/>
-                </div>
-                  <Button color="default" className="MuiButton-root-1 button-style confirm-button">
-                  Login
-                </Button>
-              </form>
-            </div>
+            {form}
           </div>
 
           <div className="login-container">
@@ -84,6 +99,8 @@ class App extends Component {
             </Typography>
 
           </div>
+
+        <NotificationContainer/>
 
         </div>
 
