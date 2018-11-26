@@ -5,9 +5,6 @@ import { CSSTransition } from "react-transition-group";
 import { NotificationManager, NotificationContainer} from "react-notifications";
 import 'react-notifications/lib/notifications.css';
 
-
-
-
 class Main extends Component {
 
     constructor(props) {
