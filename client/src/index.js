@@ -5,6 +5,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter, Route, Switch} from 'react-router-dom'
 import Main from './Main'
+import UserProfile from './UserProfile'
 
 
 ReactDOM.render((
@@ -12,6 +13,7 @@ ReactDOM.render((
       <div>
           <Route exact path="/" component={App} />
           <Route exact path="/dashboard" component={Main} />
+          <Route exact path="/profile" component={UserProfile} />
       </div>
 
     </BrowserRouter>
