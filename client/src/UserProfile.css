@@ -1,12 +1,16 @@
 .form-group{
     margin-left: 5px;
     margin-right: 5px;
-    font-size: 20px;
+    font-size: 15px;
     }
-.form-control-plaintext{
-    margin-left: 5px;
-    margin-right: 5px;
-    font-size: 20px;
+.form-control{
+    display:inline-block;
+    height:auto;
+}
+.mytext{
+    margin-left: 10px !important;
+    margin-right: 5px !important;
+    font-size: 15px !important;
     }
 
 .btn{
