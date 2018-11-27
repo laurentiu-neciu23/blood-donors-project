@@ -177,10 +177,10 @@ class UserProfile extends Component {
                 <form class="form-inline row mt-3">
                     <h6 class>Personal Information</h6>
                     <button type="button" class="btn btn-link" id="infoEditBtn" onClick={this.goEditModeInfo}>Edit</button>
-                     <button type="button" class="btn close hidden" id="infoCloseBtn" aria-label="Close" onClick={this.exitEditModeInfo}>
+                    <button type="button" class="btn btn-link hidden" id="infoSaveBtn" onClick={this.saveEditsInfo}>Save</button>
+                    <button type="button" class="btn close hidden" id="infoCloseBtn" aria-label="Close" onClick={this.exitEditModeInfo}>
                             <span aria-hidden="true">&times;</span>
                     </button>
-                    <button type="button" class="btn btn-link hidden" id="infoSaveBtn" onClick={this.saveEditsInfo}>Save</button>
                 </form>
 
 
