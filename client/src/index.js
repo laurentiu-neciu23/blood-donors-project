@@ -7,6 +7,7 @@ import { BrowserRouter, Route, Switch} from 'react-router-dom'
 import Main from './Main'
 import UserProfile from './UserProfile'
 import Summary from './Summary'
+import Donations from './Donations'
 
 
 ReactDOM.render((
@@ -16,15 +17,16 @@ ReactDOM.render((
           <Route exact path="/dashboard" component={Main} />
           <Route exact path="/profile" component={UserProfile} />
           <Route exact path="/summary" component={Summary} />
-          <Route exact path="/donations" component={Donations} />          
+          <Route exact path="/donations" component={Donations} />
+          <Route exact path="/analyses" component={Analyses} />
 	  <Route exact path="/" render={() => (
               localStorage.getItem("Authorization") != null ? (
                 <Redirect to="/dashboard"/>
               ) : (
                 <App/>
               )
-            )}/>      
-      </div>
+            )}/>       
+    </div>
 
     </BrowserRouter>
   ), document.getElementById('root'))
