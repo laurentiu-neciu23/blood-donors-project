@@ -1,0 +1,47 @@
+
+.bg-tables {
+    background-color: #ecf0f1;
+    margin-right: 30px;
+    padding: 15px; 
+}
+
+.bg-table {
+	background-color: #dcdde1;
+}
+
+.bg-chart {
+	background-color: #dfe6e9;
+}
+
+.donations {
+	margin-bottom: 30px;
+}
+
+.table1 {
+    display:table;
+}
+
+.chart {
+    display: inline-block;
+}
+
+.fs-25 {
+    font-size: 30px;
+    text-align: center;
+    font-weight: 700;
+}
+
+.results-btn {
+    margin: 0 auto;
+    display: block;
+    width: 60px;
+    font-size: 10px;
+    background-color: #487eb0;
+}
+
+.title-chart {
+    background-color: #ced6e0;
+    margin-bottom: 40px;
+    margin-top: 15px;
+    padding: 8px;
+}

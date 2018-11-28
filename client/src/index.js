@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { BrowserRouter, Route, Switch, Redirect} from 'react-router-dom'
+import { BrowserRouter, Route, Switch} from 'react-router-dom'
 import Main from './Main'
 import UserProfile from './UserProfile'
 
@@ -14,13 +14,14 @@ ReactDOM.render((
           <Route exact path="/" component={App} />
           <Route exact path="/dashboard" component={Main} />
           <Route exact path="/profile" component={UserProfile} />
+          <Route exact path="/summary" component={Summary} />
           <Route exact path="/" render={() => (
               localStorage.getItem("Authorization") != null ? (
                 <Redirect to="/dashboard"/>
               ) : (
                 <App/>
               )
-            )}/>
+            )}/>      
       </div>
 
     </BrowserRouter>
