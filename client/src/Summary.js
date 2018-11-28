@@ -25,7 +25,37 @@ class Summary extends Component {
 		super(props);
 		this.state = {
 			data: dataMock,
+			selectedData: {},
+			displayChartData: false,
+			posX: 0,
+			posY: 0
 		};
+
+		this.handleMouseEnter = this.handleMouseEnter.bind(this)
+		this.handleMouseExit = this.handleMouseExit.bind(this)
+		this.handleMouseMove = this.handleMouseMove.bind(this)
+	}
+
+	handleMouseEnter(index) {
+		this.setState({
+			displayChartData: true,
+			selectedData: dataMock[index]
+		})
+	}
+
+	handleMouseMove(event) {
+		if(this.state.displayChartData === true) {
+			this.setState({
+				posX: event.screenX,
+				posY: event.screenY
+			})
+		}
+	}
+
+	handleMouseExit() {
+		this.setState({
+			displayChartData: false
+		})
 	}
 	 
 	mouseOverHandler(d, e) {
@@ -67,9 +97,28 @@ class Summary extends Component {
 	  
 	
 	render() {
+		let movingBox;
+
+		if (this.state.displayChartData === true) {
+			let width = 100
+			let height = 100
+			let positionX = this.state.posX - width
+			let positionY = this.state.posY - height
+			console.log(this.state.posX)
+			console.log(this.state.posY)
+			movingBox = <div class="card" style={{width: width + "px", height: height + "px", top: positionY + "px", left: positionX + "px", position:"absolute"}}>
+							<ul class="list-group list-group-flush">
+							<li class="list-group-item">{this.state.selectedData.key}</li>
+							<li class="list-group-item">{this.state.selectedData.value}</li>
+							</ul>
+						</div>
+		} else {
+			movingBox = null
+		}
+
 		return (
-        <div class = "container">
-        	<div class = "row">
+    	<div class = "container" onMouseMove={this.handleMouseMove} >
+			<div class = "row">
        	 		<div class = "col-6 bg-tables">
        				<div class = "donations bg-table">
         				<label class = "fs-25 col-12 ">Donations</label>
@@ -126,21 +175,23 @@ class Summary extends Component {
 
 			<div class = "chart col-5 bg-chart">
 				<label class = "fs-25 col-12 title-chart">Blood Demand</label>
-				<Tooltip disableFocusListener disableTouchListener title="Blood Type: " id = "tooltip">
 				   <ReactSvgPieChart
-    					data={this.state.data}
-    					onSectorHover={(d, i, e) => {
-      							if (d) {
-									console.log(d.key, ": ", d.value, "%")
-							
-      							}
+						data={this.state.data}
+						expandOnHover={true}
+    					onSectorHover={(data, index, event) => {
+      							if (event.type === "mouseenter") {
+									this.handleMouseEnter(index)
+      							} else {
+									this.handleMouseExit()
+								}
 							}
 						}
   					/>
-				</Tooltip>
 			</div>
 		</div>
+		{movingBox}
 	</div>
+
 		);
 	}
 }
