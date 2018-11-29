@@ -60,10 +60,6 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                                             HttpServletResponse res,
                                             FilterChain chain,
                                             Authentication auth) throws IOException, ServletException {
-        System.out.println(" ===================== BEGIN AUTHENTICATION ==========");
-        System.out.println("[0] Name of the authenticated " + auth.getName());
-        System.out.println(" ===================== END AUTHENTICATION ============");
-
         String token = JWT.create()
             .withSubject(((org.springframework.security.core.userdetails.User) auth.getPrincipal()).getUsername())
             .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME))

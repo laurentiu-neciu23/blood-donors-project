@@ -1,7 +1,6 @@
 package com.mps.blooddonors.model;
 
 import org.hibernate.validator.constraints.Length;
-import org.springframework.http.client.MultipartBodyBuilder.PartBuilder;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
