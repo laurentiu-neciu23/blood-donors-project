@@ -4,7 +4,6 @@ package com.mps.blooddonors.security;
 import com.mps.blooddonors.model.User;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Date;
 
 // Rack chain access
