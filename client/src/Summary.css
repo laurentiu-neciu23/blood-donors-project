@@ -45,3 +45,14 @@
     margin-top: 15px;
     padding: 8px;
 }
+
+.my-modal {
+    width: 90vw !important;   /* Occupy the 90% of the screen width */
+    max-width: 90vw;
+    height: 90vw !important; 
+} 
+
+.modal {
+    display:block;
+    font-size: 12px !important;
+}
