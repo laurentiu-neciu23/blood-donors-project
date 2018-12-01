@@ -30,3 +30,7 @@
     font-size: 10px;
     background-color: #487eb0;
 }
+
+.modal{
+    display: block;
+}
