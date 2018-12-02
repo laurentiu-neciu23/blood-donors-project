@@ -10,6 +10,9 @@ import { NotificationManager, NotificationContainer} from "react-notifications";
 import 'react-notifications/lib/notifications.css';
 import LoginForm from './LoginForm';
 import RegistrationForm from './RegistrationForm';
+import * as CryptoJS from 'crypto-js';
+import  Base64URL from 'base64url';
+import Axios from 'axios';
 
 
 class App extends Component {
@@ -22,6 +25,54 @@ class App extends Component {
 
     this.onClickLogin = this.onClickLogin.bind(this)
     this.onClickRegister = this.onClickRegister.bind(this)
+    this.handleFacebookLogin = this.handleFacebookLogin.bind(this)
+  }
+
+  componentDidMount() {
+    var search = window.location.search
+    if(search === "") return
+
+    var dataHash = search.replace('?' , '')
+          .split('&')
+          .reduce((map, obj) => {
+            var split = obj.split('=')
+            if (split.length === 2) {
+              map[split[0]] = split[1]; 
+              return map 
+            } 
+            return map
+          }, {})
+
+    // Check if request was not forged       
+    if(dataHash["state"] === localStorage.getItem("facebookSessionState")) {
+      localStorage.removeItem("facebookSessionState")
+      var loginEndpoint = "http://localhost:8080/login"
+      Axios.post(loginEndpoint, dataHash)
+           .then((message) => console.log(message))
+           .catch((error) => console.log(error))
+
+    }
+  }
+
+  handleFacebookLogin() {
+    console.log("Connecting to facebook api")
+
+
+    var state = CryptoJS.lib.WordArray.random(32)
+    localStorage.setItem("facebookSessionState", state);
+
+    // DO NOT COMMIT
+    var appId = "secret do not commit "
+    var redirectUri = "http://localhost:3000/"
+
+    var facebookAccessPoint = `https://www.facebook.com/v3.2/dialog/oauth? \
+                  client_id=${appId} \
+                  &redirect_uri=${redirectUri} \
+                  &state=${state}
+                  &scope=email,public_profile`
+
+    
+    window.location.replace(facebookAccessPoint);
   }
 
   onClickRegister() {
@@ -74,7 +125,7 @@ class App extends Component {
                 <Button color="default" className="MuiButton-root-1 button-style confirm-button foreign-login-button-style">
                   Google
                 </Button>
-                <Button color="default" className="MuiButton-root-1 button-style confirm-button foreign-login-button-style">
+                <Button color="default" className="MuiButton-root-1 button-style confirm-button foreign-login-button-style" onClick={this.handleFacebookLogin}>
                   Facebook
                 </Button>
               </div>

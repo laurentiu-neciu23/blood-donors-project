@@ -21,13 +21,15 @@ public class User {
     private String email;
 
     @Column(name = "password")
-    @Length(min = 5, message = "Your password must have at least 5 characters!")
-    @NotEmpty(message = "You must provide a password!")
     private String password;
     
     @ManyToOne
     @JoinColumn(name="role_id")
     private Role role;
+
+    @OneToOne
+    @JoinColumn(name="profile_id")
+    private Profile profile;
 
     public int getId() {
         return this.id;
@@ -49,4 +51,20 @@ public class User {
         this.password = password;
     }
 
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public Profile getProfile() {
+        return profile;
+    }
+
+    public void setProfile(Profile profile) {
+        this.profile = profile;
+    }
 }
