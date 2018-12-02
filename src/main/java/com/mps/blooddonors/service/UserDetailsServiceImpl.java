@@ -24,6 +24,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if (applicationUser == null) {
             throw new UsernameNotFoundException(email);
         }
-        return new User(applicationUser.getEmail(), applicationUser.getPassword(), emptyList());
+        String password;
+
+        if(applicationUser.getFacebookAccessToken() == null) {
+            password = applicationUser.getPassword();
+        } else {
+            password = applicationUser.getFacebookAccessToken();
+        }
+        return new User(applicationUser.getEmail(), password, emptyList());
     }
 }

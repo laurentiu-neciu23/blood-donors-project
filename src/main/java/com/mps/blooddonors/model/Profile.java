@@ -21,7 +21,7 @@ public class Profile {
     @Column(name = "last_name")
     @Length(min = 2, max = 20)
     @NotNull
-    private String lastname;
+    private String lastName;
 
 
     @OneToOne(mappedBy = "profile")
@@ -44,12 +44,12 @@ public class Profile {
         this.firstName = firstName;
     }
 
-    public String getLastname() {
-        return lastname;
+    public String getLastMame() {
+        return lastName;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setLastname(String lastName) {
+        this.lastName = lastName;
     }
 
     public User getUser() {

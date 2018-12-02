@@ -22,7 +22,10 @@ public class User {
 
     @Column(name = "password")
     private String password;
-    
+
+    @Column(name = "facebook_access_token")
+    private String facebookAccessToken;
+
     @ManyToOne
     @JoinColumn(name="role_id")
     private Role role;
@@ -66,5 +69,13 @@ public class User {
 
     public void setProfile(Profile profile) {
         this.profile = profile;
+    }
+
+    public String getFacebookAccessToken() {
+        return facebookAccessToken;
+    }
+
+    public void setFacebookAccessToken(String facebookAccessToken) {
+        this.facebookAccessToken = facebookAccessToken;
     }
 }

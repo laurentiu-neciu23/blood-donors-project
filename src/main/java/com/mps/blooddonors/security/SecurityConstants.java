@@ -10,7 +10,7 @@ public class SecurityConstants {
 
     // Do not commit data bellow, this is fake data. 
 
-    public static final String CLIENT_ID = "secret";
-    public static final String SECRET_FACEBOOK_ID = "very secret";
+    public static final String CLIENT_ID = "292470231378324";
+    public static final String SECRET_FACEBOOK_ID = "secret ";
     public static final String FRONTEND_HOST = "http://localhost:3000/";
 }

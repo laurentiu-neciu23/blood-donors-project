@@ -29,13 +29,14 @@ class App extends Component {
   }
 
   componentDidMount() {
+
     var search = window.location.search
     if(search === "") return
 
     var dataHash = search.replace('?' , '')
           .split('&')
           .reduce((map, obj) => {
-            var split = obj.split('=')
+            var split = obj.split('+').join("").split('=')
             if (split.length === 2) {
               map[split[0]] = split[1]; 
               return map 
@@ -43,12 +44,21 @@ class App extends Component {
             return map
           }, {})
 
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
     // Check if request was not forged       
     if(dataHash["state"] === localStorage.getItem("facebookSessionState")) {
       localStorage.removeItem("facebookSessionState")
-      var loginEndpoint = "http://localhost:8080/login"
-      Axios.post(loginEndpoint, dataHash)
-           .then((message) => console.log(message))
+      var loginEndpoint = "http://localhost:8080/login/facebook"
+      console.log("Entering the things")
+      Axios.post(loginEndpoint, dataHash, config)
+           .then(function (response) {
+              localStorage.setItem("Authorization", response.headers.authorization);
+              window.location.reload();
+            })
            .catch((error) => console.log(error))
 
     }
@@ -62,7 +72,7 @@ class App extends Component {
     localStorage.setItem("facebookSessionState", state);
 
     // DO NOT COMMIT
-    var appId = "secret do not commit "
+    var appId = "292470231378324"
     var redirectUri = "http://localhost:3000/"
 
     var facebookAccessPoint = `https://www.facebook.com/v3.2/dialog/oauth? \
