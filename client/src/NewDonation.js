@@ -34,7 +34,7 @@ class NewDonation extends Component {
                                         </div>
                                     ))}
                             </div>
-                            <button type="button" class="btn btn-info results-btn">Check your eligibility</button>
+                            <button type="button" class="btn btn-info donation-btn">Check your eligibility</button>
                         </div>
                         <div class = "col-2"></div>
                     </div>
