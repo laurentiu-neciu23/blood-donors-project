@@ -1,6 +1,6 @@
 package com.mps.blooddonors.security;
 
-import com.mps.blooddonors.service.FacebookUserDetailsService;
+import com.mps.blooddonors.service.FacebookLoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
@@ -19,10 +19,6 @@ import static com.mps.blooddonors.security.SecurityConstants.SIGN_UP_URL;
 import static com.mps.blooddonors.security.SecurityConstants.DEBUG_URL;
 
 import com.mps.blooddonors.service.UserDetailsServiceImpl;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
 
 @EnableWebSecurity
 @Configuration
@@ -71,7 +67,7 @@ public class UserPasswordWebSecurity extends WebSecurityConfigurerAdapter {
 
     @Bean
     JWTAuthenticationFilter jwtAuthenticationFilter(AuthenticationManager auth,
-                                                    FacebookUserDetailsService fbService)
+                                                    FacebookLoginService fbService)
             throws Exception{
         JWTAuthenticationFilter jwtAuthenticationFilter = new JWTAuthenticationFilter(auth, fbService);
         jwtAuthenticationFilter.setFilterProcessesUrl("/login/**");

@@ -26,6 +26,7 @@ class App extends Component {
     this.onClickLogin = this.onClickLogin.bind(this)
     this.onClickRegister = this.onClickRegister.bind(this)
     this.handleFacebookLogin = this.handleFacebookLogin.bind(this)
+    this.handleGoogleLogin = this.handleGoogleLogin.bind(this)
   }
 
   componentDidMount() {
@@ -85,6 +86,12 @@ class App extends Component {
     window.location.replace(facebookAccessPoint);
   }
 
+
+  handleGoogleLogin() {
+
+
+  }
+
   onClickRegister() {
     this.setState(
       {
@@ -132,7 +139,7 @@ class App extends Component {
                 Also you can sign up with:
               </Typography>
               <div className="foreign-login-button-pannel">
-                <Button color="default" className="MuiButton-root-1 button-style confirm-button foreign-login-button-style">
+                <Button color="default" className="MuiButton-root-1 button-style confirm-button foreign-login-button-style" onClick={this.handleGoogleLogin}>
                   Google
                 </Button>
                 <Button color="default" className="MuiButton-root-1 button-style confirm-button foreign-login-button-style" onClick={this.handleFacebookLogin}>

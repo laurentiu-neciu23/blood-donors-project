@@ -26,6 +26,12 @@ public class User {
     @Column(name = "facebook_access_token")
     private String facebookAccessToken;
 
+    @Column(name = "google_access_token")
+    private String googleAccessToken;
+
+    @Column(name = "login_mode")
+    private String loginMode;
+
     @ManyToOne
     @JoinColumn(name="role_id")
     private Role role;
@@ -77,5 +83,21 @@ public class User {
 
     public void setFacebookAccessToken(String facebookAccessToken) {
         this.facebookAccessToken = facebookAccessToken;
+    }
+
+    public String getGoogleAccessToken() {
+        return googleAccessToken;
+    }
+
+    public void setGoogleAccessToken(String googleAccessToken) {
+        this.googleAccessToken = googleAccessToken;
+    }
+
+    public String getLoginMode() {
+        return loginMode;
+    }
+
+    public void setLoginMode(String loginMode) {
+        this.loginMode = loginMode;
     }
 }

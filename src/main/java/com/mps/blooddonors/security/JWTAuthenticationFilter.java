@@ -8,8 +8,6 @@ import java.io.IOException;
 import java.util.Date;
 
 // Rack chain access
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.FilterChain;
@@ -17,8 +15,10 @@ import javax.servlet.ServletException;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import com.mps.blooddonors.security.loginManager.LoginManager;
+import com.mps.blooddonors.security.loginManager.LoginManagerBuilder;
 import com.mps.blooddonors.serializers.FacebookAuth;
-import com.mps.blooddonors.service.FacebookUserDetailsService;
+import com.mps.blooddonors.service.FacebookLoginService;
 import org.slf4j.Logger;
 import org.springframework.security.authentication.*;
 import org.springframework.security.core.Authentication;
@@ -34,15 +34,15 @@ import static com.mps.blooddonors.security.SecurityConstants.*;
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter{
     private Logger logger;
 
-    FacebookUserDetailsService facebookUserDetailsService;
+    FacebookLoginService facebookLoginService;
 
     AuthenticationManager authenticationManager;
 
     public JWTAuthenticationFilter(AuthenticationManager authenticationManager,
-                                   FacebookUserDetailsService facebookUserDetailsService) {
+                                   FacebookLoginService facebookLoginService) {
         super.setAuthenticationManager(authenticationManager);
         this.authenticationManager = authenticationManager;
-        this.facebookUserDetailsService = facebookUserDetailsService;
+        this.facebookLoginService = facebookLoginService;
     }
 
 
@@ -87,49 +87,9 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     private Authentication getAuthentication(HttpServletRequest request)
         throws  AuthenticationException, IOException
     {
-        String pathInfo = request.getRequestURI();
-
-        if ( pathInfo.endsWith("/facebook") ) {
-            return getFacebookAuthentication(request);
-        } else {
-            return getNormalAuthentication(request);
-        }
-
+        LoginManagerBuilder loginManager = new LoginManagerBuilder(request, this.authenticationManager);
+        return loginManager.build().getAuthentication();
     }
 
-
-    private Authentication getFacebookAuthentication(HttpServletRequest request)
-        throws AuthenticationException, IOException
-    {
-        FacebookAuth facebookAuth = new ObjectMapper().readValue(request.getInputStream(), FacebookAuth.class);
-
-        org.springframework.security.core.userdetails.User user;
-        user = facebookUserDetailsService.loadUserByFacebookAuth(facebookAuth);
-        if (user != null) {
-            Authentication auth = this.getAuthenticationManager().authenticate(
-                     new UsernamePasswordAuthenticationToken(
-                             user.getUsername(),
-                             user.getPassword()
-                     )
-                    );
-
-            return auth;
-        }else {
-            throw new BadCredentialsException("Could not verify with Facebook identity");
-        }
-    }
-
-
-    private Authentication getNormalAuthentication(HttpServletRequest request)
-            throws AuthenticationException, IOException
-    {
-        User user = new ObjectMapper().readValue(request.getInputStream(), User.class);
-        Authentication auth = this.getAuthenticationManager().authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        user.getEmail(),
-                        user.getPassword()
-                ));
-        return auth;
-    }
 
 }

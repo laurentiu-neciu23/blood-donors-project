@@ -24,13 +24,22 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if (applicationUser == null) {
             throw new UsernameNotFoundException(email);
         }
-        String password;
 
-        if(applicationUser.getFacebookAccessToken() == null) {
-            password = applicationUser.getPassword();
-        } else {
-            password = applicationUser.getFacebookAccessToken();
+        String loginMode = applicationUser.getLoginMode();
+
+        if(loginMode != null) {
+            String password = null;
+
+            if (loginMode == "DIRECT") {
+                password = applicationUser.getPassword();
+            } else if (loginMode == "FACEBOOK") {
+                password = applicationUser.getFacebookAccessToken();
+            }
+
+            return new User(applicationUser.getEmail(), password, emptyList());
+
+        }else {
+            return null;
         }
-        return new User(applicationUser.getEmail(), password, emptyList());
     }
 }

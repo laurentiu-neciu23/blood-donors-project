@@ -1,4 +1,4 @@
-package com.mps.blooddonors.comunicator;
+package com.mps.blooddonors.comunicator.facebook;
 
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
@@ -6,7 +6,6 @@ import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import com.mps.blooddonors.security.SecurityConstants;
 import com.mps.blooddonors.serializers.FacebookAuth;
-import org.springframework.stereotype.Component;
 
 public class FacebookOAuthCommunicator {
 
