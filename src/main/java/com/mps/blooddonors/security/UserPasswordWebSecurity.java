@@ -66,10 +66,8 @@ public class UserPasswordWebSecurity extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    JWTAuthenticationFilter jwtAuthenticationFilter(AuthenticationManager auth,
-                                                    FacebookLoginService fbService)
-            throws Exception{
-        JWTAuthenticationFilter jwtAuthenticationFilter = new JWTAuthenticationFilter(auth, fbService);
+    JWTAuthenticationFilter jwtAuthenticationFilter(AuthenticationManager auth){
+        JWTAuthenticationFilter jwtAuthenticationFilter = new JWTAuthenticationFilter(auth);
         jwtAuthenticationFilter.setFilterProcessesUrl("/login/**");
         return jwtAuthenticationFilter;
     }
@@ -77,9 +75,8 @@ public class UserPasswordWebSecurity extends WebSecurityConfigurerAdapter {
 
 
     @Bean
-    JWTAuthorizationFilter jwtAuthorizationFilter(AuthenticationManager auth) throws  Exception{
-        JWTAuthorizationFilter jwtAuthorizationFilter = new JWTAuthorizationFilter(auth);
-        return jwtAuthorizationFilter;
+    JWTAuthorizationFilter jwtAuthorizationFilter(AuthenticationManager auth){
+        return new JWTAuthorizationFilter(auth);
     }
 
 

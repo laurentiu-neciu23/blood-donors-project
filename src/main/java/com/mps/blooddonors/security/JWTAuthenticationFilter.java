@@ -12,8 +12,6 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 
 import com.mps.blooddonors.security.loginManager.LoginManagerBuilder;
-import com.mps.blooddonors.service.FacebookLoginService;
-import org.slf4j.Logger;
 import org.springframework.security.authentication.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -26,17 +24,9 @@ import static com.mps.blooddonors.security.SecurityConstants.*;
 
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter{
-    private Logger logger;
 
-    FacebookLoginService facebookLoginService;
-
-    AuthenticationManager authenticationManager;
-
-    public JWTAuthenticationFilter(AuthenticationManager authenticationManager,
-                                   FacebookLoginService facebookLoginService) {
+    public JWTAuthenticationFilter(AuthenticationManager authenticationManager) {
         super.setAuthenticationManager(authenticationManager);
-        this.authenticationManager = authenticationManager;
-        this.facebookLoginService = facebookLoginService;
     }
 
 
@@ -68,18 +58,12 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         System.out.println(token);
         res.addHeader(HEADER_STRING, TOKEN_PREFIX + token);
     }
-
-
-    protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed)
-            throws IOException, ServletException {
-        System.out.println(failed.getMessage());
-    }
-
+    
 
     private Authentication getAuthentication(HttpServletRequest request)
         throws  AuthenticationException, IOException
     {
-        LoginManagerBuilder loginManager = new LoginManagerBuilder(request, this.authenticationManager);
+        LoginManagerBuilder loginManager = new LoginManagerBuilder(request, super.getAuthenticationManager());
         return loginManager.build().getAuthentication();
     }
 

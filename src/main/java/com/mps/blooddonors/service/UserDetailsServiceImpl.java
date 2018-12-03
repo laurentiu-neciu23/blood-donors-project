@@ -31,7 +31,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
             System.out.println(loginMode);
             if (loginMode.equals("DIRECT")) {
-                password = applicationUser.getPassword();
+                password = applicationUser.getPasswordDigest();
             } else if (loginMode.equals("FACEBOOK")) {
                 password = applicationUser.getFacebookAccessToken();
             } else if (loginMode.equals("GOOGLE")) {

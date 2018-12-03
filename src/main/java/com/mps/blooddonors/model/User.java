@@ -1,5 +1,7 @@
 package com.mps.blooddonors.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.mps.blooddonors.validator.Authenticable;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
@@ -8,11 +10,15 @@ import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "users")
+@Authenticable(password = "password", authTokens = {"facebookAccessToken", "googleAccessToken"},
+                message = "The password must have a minimum of 6 characters to continue.",
+                adminTouchPropertyName = "adminTouched",
+                passwordSize = 8)
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "user_id")  
+    @Column(name = "user_id")
     private int id;
 
     @Column(name = "email", unique=true)
@@ -20,8 +26,24 @@ public class User {
     @NotEmpty(message = "You must provde an email!")
     private String email;
 
-    @Column(name = "password")
+    @Transient
     private String password;
+
+    @Transient
+    private String passwordConfirmation;
+
+    /**
+     * Set this transient property to true when you want to skip
+     * - @Authenticable validation
+     * - @Confirmable validation
+     *  Important when updating internal states such as login mode.
+     *  Admin touched is ignored by Jackson for security reasons.
+     */
+    @JsonIgnore
+    private boolean adminTouched;
+
+    @Column(name = "password_digest")
+    private String passwordDigest;
 
     @Column(name = "facebook_access_token")
     private String facebookAccessToken;
@@ -99,5 +121,29 @@ public class User {
 
     public void setLoginMode(String loginMode) {
         this.loginMode = loginMode;
+    }
+
+    public String getPasswordDigest() {
+        return passwordDigest;
+    }
+
+    public void setPasswordDigest(String passwordDigest) {
+        this.passwordDigest = passwordDigest;
+    }
+
+    public String getPasswordConfirmation() {
+        return passwordConfirmation;
+    }
+
+    public void setPasswordConfirmation(String passwordConfirmation) {
+        this.passwordConfirmation = passwordConfirmation;
+    }
+
+    public void toggleAdminTouched() {
+        this.adminTouched = true;
+    }
+
+    public boolean isAdminTouched() {
+        return adminTouched;
     }
 }

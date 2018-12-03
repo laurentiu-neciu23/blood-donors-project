@@ -31,6 +31,8 @@ public class DirectLoginService extends AbstractLoginService {
         com.mps.blooddonors.model.User user = userRepository.findByEmail(u.getEmail());
         if(user != null) {
             user.setLoginMode(AUTH_MODE);
+            user.toggleAdminTouched();
+            System.out.println(user.isAdminTouched());
             userRepository.save(user);
         }
         return user;
