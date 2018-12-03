@@ -29,33 +29,28 @@ class App extends Component {
     this.handleGoogleLogin = this.handleGoogleLogin.bind(this)
   }
 
-  componentDidMount() {
+  parseData = (search) => (
+    search.replace('?' , '')
+      .split('&')
+      .reduce((map, obj) => {
+        var split = obj.split('+').join("").split('=')
+        if (split.length === 2) {
+          map[split[0]] = split[1]; 
+          return map 
+        } 
+        return map
+      }, {}))
 
+  authenticateUsingFacebook() {
     var search = window.location.search
     if(search === "") return
 
-    var dataHash = search.replace('?' , '')
-          .split('&')
-          .reduce((map, obj) => {
-            var split = obj.split('+').join("").split('=')
-            if (split.length === 2) {
-              map[split[0]] = split[1]; 
-              return map 
-            } 
-            return map
-          }, {})
+    var dataHash = this.parseData(search)
 
-    const config = {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    };
-    // Check if request was not forged       
     if(dataHash["state"] === localStorage.getItem("facebookSessionState")) {
       localStorage.removeItem("facebookSessionState")
       var loginEndpoint = "http://localhost:8080/login/facebook"
-      console.log("Entering the things")
-      Axios.post(loginEndpoint, dataHash, config)
+      Axios.post(loginEndpoint, dataHash)
            .then(function (response) {
               localStorage.setItem("Authorization", response.headers.authorization);
               window.location.reload();
@@ -65,31 +60,72 @@ class App extends Component {
     }
   }
 
+  authenticateUsingGoogle() {
+    var search = window.location.search
+    if(search === "") return
+
+    var dataHash = this.parseData(search)
+
+    if(dataHash["state"] === localStorage.getItem("googleSessionState")) {
+      localStorage.removeItem("googleSessionState")
+      var loginEndpoint = "http://localhost:8080/login/google"
+      console.log(dataHash)
+      Axios.post(loginEndpoint, dataHash)
+           .then(function (response) {
+              localStorage.setItem("Authorization", response.headers.authorization);
+              window.location.reload();
+            })
+           .catch((error) => console.log(error))
+
+    }
+
+  }
+
+  componentDidMount() {
+    var foreignAuthentication = localStorage.getItem("foreignAuthentication")
+    if(foreignAuthentication === "facebook") {
+      this.authenticateUsingFacebook();
+    }
+
+    if(foreignAuthentication === "google") {
+      this.authenticateUsingGoogle();
+    }
+
+    localStorage.removeItem("foreignAuthentication")
+  }
+
   handleFacebookLogin() {
-    console.log("Connecting to facebook api")
-
-
     var state = CryptoJS.lib.WordArray.random(32)
-    localStorage.setItem("facebookSessionState", state);
 
-    // DO NOT COMMIT
+    localStorage.setItem("facebookSessionState", state);
     var appId = "292470231378324"
     var redirectUri = "http://localhost:3000/"
 
     var facebookAccessPoint = `https://www.facebook.com/v3.2/dialog/oauth?\
                   client_id=${appId}\
                   &redirect_uri=${redirectUri}\
-                  &state=${state}
+                  &state=${state}\
                   &scope=email,public_profile`
 
-    
+    localStorage.setItem("foreignAuthentication", "facebook")
     window.location.replace(facebookAccessPoint);
   }
 
-
   handleGoogleLogin() {
 
+    var state = CryptoJS.lib.WordArray.random(32)
 
+    localStorage.setItem("googleSessionState", state);
+    var appId = "594450457698-e65b8h1sc0mamr6iajai09vg21nqc0dh.apps.googleusercontent.com"
+    var googleAccessPoint = `https://accounts.google.com/o/oauth2/v2/auth?` +
+                            `&client_id=${appId}` +
+                            `&response_type=code&` +
+                            `&scope=openid%20email%20profile`+
+                            `&redirect_uri=http://localhost:3000` +
+                            `&state=${state}`
+    
+    localStorage.setItem("foreignAuthentication", "google")
+    window.location.replace(googleAccessPoint);
   }
 
   onClickRegister() {

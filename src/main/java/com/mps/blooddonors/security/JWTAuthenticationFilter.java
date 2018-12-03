@@ -2,8 +2,6 @@ package com.mps.blooddonors.security;
 
 // Own model to authenticate
 import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
-import com.mps.blooddonors.model.User;
-
 import java.io.IOException;
 import java.util.Date;
 
@@ -13,11 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import com.mps.blooddonors.security.loginManager.LoginManager;
 import com.mps.blooddonors.security.loginManager.LoginManagerBuilder;
-import com.mps.blooddonors.serializers.FacebookAuth;
 import com.mps.blooddonors.service.FacebookLoginService;
 import org.slf4j.Logger;
 import org.springframework.security.authentication.*;
@@ -52,16 +46,14 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         try {
             return getAuthentication(request);
         } catch (UnrecognizedPropertyException property) {
-            String msg = "Could not find property " + property.getPropertyName() + " in object model";
-            logger.error(msg);
+
+            String msg = "Could not find property " + property;
             throw new AuthenticationCredentialsNotFoundException(msg);
 
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
     }
-
 
     @Override
     protected void successfulAuthentication(HttpServletRequest req,

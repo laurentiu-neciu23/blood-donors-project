@@ -1,4 +1,4 @@
-package com.mps.blooddonors.comunicator.facebook;
+package com.mps.blooddonors.communicator.google;
 
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
@@ -6,32 +6,28 @@ import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import org.json.JSONObject;
 
-public class FacebookDetailsCommunicator {
+public class GoogleDetailsCommunicator {
 
     private JSONObject httpResponseJsonObject = null;
     private String authToken = null;
-    final private String urlBase = "https://graph.facebook.com/me?";
+    final private String profileEndpoint = "https://www.googleapis.com/oauth2/v3/userinfo";
 
 
-    public FacebookDetailsCommunicator(String authToken) {
+    public GoogleDetailsCommunicator(String authToken) {
         this.authToken = authToken;
         httpResponseJsonObject = fetchHttpResponse();
     }
 
-
-
     public String getFirstName() {
         if(httpResponseJsonObject != null) {
-            return httpResponseJsonObject.getString("first_name");
+            return httpResponseJsonObject.getString("given_name");
         }
-
         return null;
     }
 
-
     public String getLastName() {
         if(httpResponseJsonObject != null){
-            return httpResponseJsonObject.getString("last_name");
+            return httpResponseJsonObject.getString("family_name");
         }
         return null;
     }
@@ -41,14 +37,14 @@ public class FacebookDetailsCommunicator {
             return httpResponseJsonObject.getString("email");
         }
         return null;
-
-
     }
+
     private JSONObject fetchHttpResponse() {
         HttpResponse<JsonNode> response = null;
         try {
-            response = Unirest.get(fetchUrl())
+            response = Unirest.get(profileEndpoint)
                     .header("content-type", "application/json")
+                    .header("Authorization", "Bearer " + authToken)
                     .asJson();
             return response.getBody().getObject();
 
@@ -56,16 +52,5 @@ public class FacebookDetailsCommunicator {
             return null;
         }
     }
-
-    private String fetchUrl() {
-        String url = urlBase
-                + "fields=email,first_name,last_name"
-                + "&access_token="
-                + authToken;
-
-        return url;
-    }
-
-
 
 }

@@ -1,15 +1,13 @@
 package com.mps.blooddonors.service;
 
-import com.mps.blooddonors.comunicator.facebook.FacebookDetailsCommunicator;
-import com.mps.blooddonors.comunicator.facebook.FacebookOAuthCommunicator;
+import com.mps.blooddonors.communicator.facebook.FacebookDetailsCommunicator;
+import com.mps.blooddonors.communicator.facebook.FacebookOAuthCommunicator;
 import com.mps.blooddonors.model.Profile;
 import com.mps.blooddonors.model.User;
 import com.mps.blooddonors.repository.ProfileRepository;
 import com.mps.blooddonors.repository.UserRepository;
 import com.mps.blooddonors.serializers.FacebookAuth;
-import org.apache.http.auth.AUTH;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 

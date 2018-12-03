@@ -1,5 +1,6 @@
 package com.mps.blooddonors.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -12,11 +13,9 @@ import com.mps.blooddonors.repository.UserRepository;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
-    private UserRepository userRepository;
 
-    public UserDetailsServiceImpl(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+    @Autowired
+    private UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -30,12 +29,14 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if(loginMode != null) {
             String password = null;
 
-            if (loginMode == "DIRECT") {
+            System.out.println(loginMode);
+            if (loginMode.equals("DIRECT")) {
                 password = applicationUser.getPassword();
-            } else if (loginMode == "FACEBOOK") {
+            } else if (loginMode.equals("FACEBOOK")) {
                 password = applicationUser.getFacebookAccessToken();
+            } else if (loginMode.equals("GOOGLE")) {
+                password = applicationUser.getGoogleAccessToken();
             }
-
             return new User(applicationUser.getEmail(), password, emptyList());
 
         }else {

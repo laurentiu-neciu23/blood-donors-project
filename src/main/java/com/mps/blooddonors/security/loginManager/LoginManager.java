@@ -33,10 +33,16 @@ public class LoginManager {
     public Authentication getAuthentication()
             throws AuthenticationException, IOException
     {
+
+        System.out.println(request.getInputStream());
         Object o = new ObjectMapper().readValue(request.getInputStream(), klass);
+
         User user = loginService.login(o);
         if (user != null) {
+            System.out.println(user.getUsername());
+            System.out.println(user.getPassword());
             Authentication auth = authenticationManager.authenticate(
+
                     new UsernamePasswordAuthenticationToken(
                             user.getUsername(),
                             user.getPassword()

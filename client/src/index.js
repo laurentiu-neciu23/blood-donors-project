@@ -11,8 +11,14 @@ import Donations from './Donations'
 import Analyses from './Analyses'
 import NewDonation from './NewDonation'
 
+var redirect = null;
+if(localStorage.getItem("Authorization") != null) {
+  redirect = <Redirect to="/dashboard"/>
+}
 
 ReactDOM.render((
+  
+
     <BrowserRouter>
       <div>
           <Route exact path="/" component={App} />
@@ -22,14 +28,8 @@ ReactDOM.render((
           <Route exact path="/new-donation" component={NewDonation} />
           <Route exact path="/donations" component={Donations} />
           <Route exact path="/analyses" component={Analyses} />
-          <Redirect render={() => (
-              localStorage.getItem("Authorization") != null ? (
-                <Redirect to="/dashboard"/>
-              ) : (
-                <App/>
-              )
-            )}/>             
-	</div>
+          {redirect}            
+	      </div>
 
     </BrowserRouter>
   ), document.getElementById('root'))
