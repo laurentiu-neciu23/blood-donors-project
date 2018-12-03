@@ -1,0 +1,34 @@
+* Stabilirea detaliilor de implementare
+* 12.11.2018, 30 minute 
+
+===== Agenda =====
+
+* Clarificare cerinte proiect
+* Stabilire tehnologii folosite
+* Desemnare roluri
+* Creare mediu de lucru pentru proiect(repo etc.)
+* Stabilire unei forme intiale a interfetei
+* Impartire taskuri
+
+===== Participanti =====
+
+* Bardac Diana
+* Bouleanu Oana-Bianca
+* Ionescu Laurentiu Florin
+* Gogiltan Bianca
+* Mirescu Andreea Alexandra
+* Pirvan Daniel
+* Uta Iulia Alexandra
+
+===== Discutii =====
+
+* Prima data am stabilit rolurile in echipa si anume project manager Diana, team leader Laurentiu, echipa de dev front end: Daniel si Iulia, iar echipa de back end: Bianca si Bianca, nu in ultimul rand tester Andreea.
+* Am decis sa realizam front end-ul folosind ReactJS, iar backend-ul in Java. Vom folosi Spring pentru a le conecta si, de asemenea ne vom folosi de o baza de date MySQL. 
+* Am stabilit o structura generala a bazei de date pe care o vom folosi, adica ce date vom stoca pentru fiecare utilizator. De asemenea, am decis ce date vom cere utilizatorilor la logare (nume, varsta, greutate  etc.) si ca fiecare utilizator va trebui sa confirme ca nu are diverse boli ce nu i-ar permite sa doneze.
+
+
+===== Decizii/concluzii =====   
+
+* Realizare SDD 
+* Realizarea unui front end minimalist pana la urmatoarea intalnire.
+
