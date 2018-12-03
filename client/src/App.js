@@ -75,9 +75,9 @@ class App extends Component {
     var appId = "292470231378324"
     var redirectUri = "http://localhost:3000/"
 
-    var facebookAccessPoint = `https://www.facebook.com/v3.2/dialog/oauth? \
-                  client_id=${appId} \
-                  &redirect_uri=${redirectUri} \
+    var facebookAccessPoint = `https://www.facebook.com/v3.2/dialog/oauth?\
+                  client_id=${appId}\
+                  &redirect_uri=${redirectUri}\
                   &state=${state}
                   &scope=email,public_profile`
 
