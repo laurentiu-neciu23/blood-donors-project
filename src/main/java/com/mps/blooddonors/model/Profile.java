@@ -21,5 +21,42 @@ public class Profile {
     @Column(name = "last_name")
     @Length(min = 2, max = 20)
     @NotNull
-    private String lastname;
+    private String lastName;
+
+
+    @OneToOne(mappedBy = "profile")
+    private User user;
+
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastMame() {
+        return lastName;
+    }
+
+    public void setLastname(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }
