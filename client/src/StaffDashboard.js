@@ -4,7 +4,7 @@ import {Button} from "@material-ui/core";
 import { CSSTransition } from "react-transition-group";
 import { NotificationManager, NotificationContainer} from "react-notifications";
 import 'react-notifications/lib/notifications.css';
-import MakeRequest from './MakeRequest'
+import AddDonation from './AddDonation';
 import ManageDonations from './ManageDonations'
 import UserProfile from './UserProfile';
 import Summary from './Summary';
@@ -37,7 +37,7 @@ class StaffDashboard extends Component {
             myComp = <Summary/>
         }
         else if(this.state.toShow == "make-request") {
-            myComp = <MakeRequest/>
+            myComp = <AddDonation/>
         }
         else if(this.state.toShow == "analyses") {
             myComp = <Analyses/>
@@ -80,21 +80,23 @@ class StaffDashboard extends Component {
                             <Button color='default' className="Multibutton-root-1 button" onClick={() => this.handleShow("staff-profile")}>
                                 Staff Profile
                             </Button>
-                            <Button color='default' className="Multibutton-root-1 button" onClick={() => this.handleShow("donations")}>
-                                Donations
-                            </Button>
                             <Button color='default' className="Multibutton-root-1 button" onClick={() => this.handleShow("analyses")}>
                                 Analyses
                             </Button>
+                            <Button color='default' className="Multibutton-root-1 button" onClick={() => this.handleShow("donations")}>
+                                Donations
+                            </Button>
                             <Button color='default' className="Multibutton-root-1 button" onClick={() => this.handleShow("new-donation")}>
-                                New Donation
+                                Eligibility
                             </Button>
-                            <Button color='default' className="Multibutton-root-1 button" onClick={() => this.handleShow("make-request")}>
-                                Add Donation Request
-                            </Button>
+                            <hr/>
                             <Button color='default' className="Multibutton-root-1 button" onClick={() => this.handleShow("manage-donations")}>
                                 Manage Donations
                             </Button>
+                            <Button color='default' className="Multibutton-root-1 button" onClick={() => this.handleShow("make-request")}>
+                                Add Donation Info
+                            </Button>
+
                         </div>
                     </div>
                     

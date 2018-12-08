@@ -1,15 +1,16 @@
 import React, { Component } from 'react'
-import './MakeRequest.css'
+import './AddDonation.css'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { NotificationManager, NotificationContainer} from "react-notifications";
 
 
-class MakeRequest extends Component {
+class AddDonation extends Component {
     state = {
         bloodtype: null,
-        urgency: null,
+        donor: null,
         recipient: null,
+        hospital: null,
         donation_date: new Date()
     }
 
@@ -29,13 +30,18 @@ class MakeRequest extends Component {
             recipient: e.target.value});
     }
 
-    handleUrgChange = (e) => {
+    handleDonorChange = (e) => {
         this.setState({
-            urgency: Number(e.target.innerText)});
+            donor: e.target.innerText});
+    }
+
+    handleHospitalChange = (e) => {
+        this.setState({
+            hospital: e.target.innerText});
     }
 
     checkAndSend = () => {
-        if( this.state.bloodtype == null || this.state.urgency== null || this.state.recipient == null){
+        if( this.state.bloodtype == null || this.state.donor== null || this.state.recipient == null || this.state.hospital == null){
             NotificationManager.error("Error", "Please fill in all * fields!");
         } else {
             //TO DO: SEND THIS STATE TO BE SOMEHOW IDK FAM
@@ -50,8 +56,9 @@ class MakeRequest extends Component {
         this.setState({bloodtype: null,
             urgency: null,
             recipient: null});
-        document.getElementById("NameInput").value="";
-        document.getElementById("ComInput").value="";
+        document.getElementById("DonorInput").value="";
+        document.getElementById("RecipientInput").value="";
+        document.getElementById("HospitalInput").value="";
     }
 
     render(){
@@ -64,19 +71,19 @@ class MakeRequest extends Component {
                 <div className="form-group flex">
                     <label><strong>Donor's Full Name*</strong></label>
                     <div class="form-group flex"> 
-                        <input type="text" class="form-control" id="NameInput" placeholder="Donor Full Name" onChange={this.handleRecipientChange}/>
+                        <input type="text" class="form-control" id="DonorInput" placeholder="Donor Full Name" onChange={this.handleDonorChange}/>
                     </div>
                 </div>
                 <div className="form-group flex">
-                    <label><strong>Receiver's Full Name*</strong></label>
+                    <label><strong>Recipient's Full Name*</strong></label>
                     <div class="form-group flex"> 
-                        <input type="text" class="form-control" id="NameInput" placeholder="Receiver Full Name" onChange={this.handleRecipientChange}/>
+                        <input type="text" class="form-control" id="RecipientInput" placeholder="Receiver Full Name" onChange={this.handleRecipientChange}/>
                     </div>
                 </div>
                 <div className="form-group flex">
                     <label><strong>Hospital Name*</strong></label>
                     <div class="form-group flex"> 
-                        <input type="text" class="form-control" id="NameInput" placeholder="Hospital Name" onChange={this.handleRecipientChange}/>
+                        <input type="text" class="form-control" id="HospitalInput" placeholder="Hospital Name" onChange={this.handleHospitalChange}/>
                     </div>
                 </div>
                 <div className="form-group flex">
@@ -109,4 +116,4 @@ class MakeRequest extends Component {
         )
     }
 }
-export default MakeRequest;
+export default AddDonation;

@@ -83,7 +83,7 @@
   .lds-heart div {
     width: 26px;
     height: 26px;
-    background:rgb(0, 220, 255)  !important;
+    background:#28a745  !important;
     animation: lds-heart 1.2s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
   }
   .lds-heart div:after{
@@ -92,7 +92,7 @@
     display: block;
     width: 26px;
     height: 26px;
-    background:rgb(62, 228, 255);
+    background:#b7ff57;
   }
   .lds-heart div:before {
     content: " ";
@@ -100,7 +100,7 @@
     display: block;
     width: 26px;
     height: 26px;
-    background:rgb(23, 162, 184);
+    background:#177530;
   }
   .lds-heart div:before {
     left: -17px;
