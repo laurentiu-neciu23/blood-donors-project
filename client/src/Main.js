@@ -79,7 +79,7 @@ class Main extends Component {
                                 Donations
                             </Button>
                             <Button color='default' className="Multibutton-root-1 button" onClick={() => this.handleShow("new-donation")}>
-                                New Donation
+                                Eligibility Test
                             </Button>
                         </div>
                     </div>
