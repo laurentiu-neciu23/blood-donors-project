@@ -56,9 +56,7 @@ class Main extends Component {
     render() {
         return (
             <div className="Main">
-                <div>
-                    {this.renderPage()}
-                </div>
+                {this.renderPage()}
                 <CSSTransition in={true} appear={true} timeout={1000} classNames="fade">
                     <div className="row-flex pannel">
                         <div className="lds-heart-container">
