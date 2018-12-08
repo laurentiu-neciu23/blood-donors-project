@@ -4,6 +4,7 @@ import {Button} from "@material-ui/core";
 import { CSSTransition } from "react-transition-group";
 import { NotificationManager, NotificationContainer} from "react-notifications";
 import 'react-notifications/lib/notifications.css';
+import UserProfile from './UserProfile';
 
 class Main extends Component {
 
@@ -21,6 +22,7 @@ class Main extends Component {
     render() {
         return (
             <div className="Main">
+                
                 <CSSTransition in={true} appear={true} timeout={1000} classNames="fade">
                     <div className="row-flex pannel">
                         <div className="lds-heart-container">
@@ -47,8 +49,9 @@ class Main extends Component {
                             </Button>
                         </div>
                     </div>
-
+                    
                 </CSSTransition>
+                <UserProfile className="row-flex"/>
                 <NotificationContainer />
             </div>
 
