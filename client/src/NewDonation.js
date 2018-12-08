@@ -7,7 +7,7 @@ const questions = [
     {text: "1. Are you 18 - 60 years old?"},
     {text: "2. Do you currently weigh less than 50kg?"},
     {text: "3. Is your pulse between 60 - 100 heartbeat/min?"},
-    {text: "4. Did you take any surgery in the last 6 mounths?"},
+    {text: "4. Did you take any surgery in the last 6 months?"},
     {text: "5. Have you ever had any of these diseases: hepatitis B, hepatitis C, HIV, syphilis or any type of cancer?"},
     {text: "6. Have you received a blood transfusion (except with your own blood) in the past 12 months?"},
     {text: "7. Have you ever used injectable drugs, including anabolic steroids, unless prescribed by a physician?"},
