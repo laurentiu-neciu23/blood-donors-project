@@ -1,0 +1,43 @@
+.form-group{
+    margin-left: 5px;
+    margin-right: 5px;
+    font-size: 15px;
+}
+.form-control{
+    display:inline-block;
+    height:auto;
+    margin-top: 15px;
+}
+.mytext{
+    margin-left: 10px !important;
+    margin-right: 5px !important;
+    font-size: 15px !important;
+}
+
+.container {
+    height: 100%;
+}
+
+.row{
+        margin-left: 0px !important;
+        }
+
+h6{
+    margin-top: 5px !important;
+}
+
+.btn-info{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+    }
+
+.btn-secondary {
+    width: 20%;
+    background-color: #107f90;
+}
+
+.hidden{
+    display: none;
+}
