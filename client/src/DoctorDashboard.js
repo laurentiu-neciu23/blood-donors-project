@@ -78,14 +78,9 @@ class DoctorDashboard extends Component {
                             <Button color='default' className="Multibutton-root-1 button" onClick={() => this.handleShow("summary")}>
                                 Summary
                             </Button>
-                            <Button color='default' className="Multibutton-root-1 button" onClick={() => this.handleShow("requests")}>
-                                Blood Requests
-                            </Button>
-                            <Button color='default' className="Multibutton-root-1 button" onClick={() => this.handleShow("make-request")}>
-                                File a request
-                            </Button>
+                            
                             <Button color='default' className="Multibutton-root-1 button" onClick={() => this.handleShow("profile")}>
-                                Profile
+                                Doctor's Profile
                             </Button>
 
                             <Button color='default' className="Multibutton-root-1 button" onClick={() => this.handleShow("analyses")}>
@@ -96,6 +91,13 @@ class DoctorDashboard extends Component {
                             </Button>
                             <Button color='default' className="Multibutton-root-1 button" onClick={() => this.handleShow("new-donation")}>
                                 Eligibility Test
+                            </Button>
+                            <hr/>
+                            <Button color='default' className="Multibutton-root-1 button" onClick={() => this.handleShow("requests")}>
+                                Blood Requests
+                            </Button>
+                            <Button color='default' className="Multibutton-root-1 button" onClick={() => this.handleShow("make-request")}>
+                                File a request
                             </Button>
                         </div>
                     </div>
