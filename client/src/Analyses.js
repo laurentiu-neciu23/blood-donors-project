@@ -61,7 +61,7 @@ class Analyses extends Component {
 		super(props);
 		this.state = {
 			data: donationsTable,
-			show: true
+			show: false
 		};
 		this.handleShow = this.handleShow.bind(this);
 		this.handleClose = this.handleClose.bind(this);
