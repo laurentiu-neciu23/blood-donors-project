@@ -8,10 +8,10 @@ var Modal = require('react-bootstrap-modal');
 
 
 const dataMock = [
-  { key: '0', value: 40, color: '#cd6133' }, 
-  { key: 'A', value: 5, color: '#C13C37' }, 
-  { key: 'B', value: 20, color: '#6A2135' }, 
-  { key: 'AB', value: 35, color: '#f6e58d' }
+  { key: '0', value: 40, color: '#cd6133', text: "0 blood cells are...", symbol: "🆎" }, 
+  { key: 'A', value: 5, color: '#C13C37', text: "A blood cells are...", symbol: "🆎" }, 
+  { key: 'B', value: 20, color: '#6A2135', text: "B blood cells are...", symbol: "🆎"}, 
+  { key: 'AB', value: 35, color: '#f6e58d', text: "AB blood cells are...", symbol: "🆎"  }
 ];
 
 const mockAnalysisData = [
@@ -101,6 +101,8 @@ class Summary extends Component {
 		this.setState({
 			displayChartData: false
 		})
+
+		console.log("Exited mouse")
 	}
 	 
 	mouseOverHandler(d, e) {
@@ -159,14 +161,13 @@ class Summary extends Component {
 		if (this.state.displayChartData === true) {
 			let width = 100
 			let height = 100
-			let positionX = this.state.posX - width
-			let positionY = this.state.posY - height
-			console.log(this.state.posX)
-			console.log(this.state.posY)
+			let positionX = this.state.posX - 50
+			let positionY = this.state.posY - 50
 			movingBox = <div class="card" style={{width: width + "px", height: height + "px", top: positionY + "px", left: positionX + "px", position:"absolute"}}>
 							<ul class="list-group list-group-flush">
-							<li class="list-group-item">{this.state.selectedData.key}</li>
-							<li class="list-group-item">{this.state.selectedData.value}</li>
+							<li class="list-group-item">{this.state.selectedData.key}-type blood request</li>
+							<li class="list-group-item">{this.state.selectedData.value}%</li>
+							<li class="list-group-item">{this.state.selectedData.text}</li>
 							</ul>
 						</div>
 		} else {
