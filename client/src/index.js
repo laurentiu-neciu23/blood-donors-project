@@ -10,6 +10,7 @@ import Summary from './Summary'
 import Donations from './Donations'
 import Analyses from './Analyses'
 import NewDonation from './NewDonation'
+import StaffDashboard from './StaffDashboard'
 
 
 ReactDOM.render((
@@ -22,6 +23,7 @@ ReactDOM.render((
           <Route exact path="/new-donation" component={NewDonation} />
           <Route exact path="/donations" component={Donations} />
           <Route exact path="/analyses" component={Analyses} />
+          <Route exact path="/staffDashboard" component={StaffDashboard} />
           <Redirect render={() => (
               localStorage.getItem("Authorization") != null ? (
                 <Redirect to="/dashboard"/>
