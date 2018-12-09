@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import './NewDonation.css'
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { NotificationManager, NotificationContainer} from "react-notifications";
 var Modal = require('react-bootstrap-modal');
 
 
@@ -20,7 +23,14 @@ class NewDonation extends Component {
 		super(props);
 		this.state = {
             show: false,
-            text: "placeholder"
+            text: "placeholder",
+            goToForm: false,
+            showQuestions: true,
+            bloodtype: null,
+            donor: null,
+            recipient: null,
+            hospital: null,
+            donation_date: new Date()
 		};
 		this.handleShow = this.handleShow.bind(this);
 		this.handleClose = this.handleClose.bind(this);
@@ -36,29 +46,175 @@ class NewDonation extends Component {
 	handleClose() {
 		this.setState({ show: false });
     }
-      
-    handleEligibility() {
-        if (document.getElementById('yesLabel').checked) {
-            this.state.text = "You can't donate blood."
+
+    handleBoy = (date) => {
+        this.setState({
+            donation_date: date
+        })
+    }
+
+    handleBloodChange = (e) => {
+        this.setState({
+            bloodtype: e.target.innerText});
+    }
+
+    handleDonorChange = (e) => {
+        this.setState({
+            donor: e.target.innerText});
+    }
+
+    handleHospitalChange = (e) => {
+        this.setState({
+            hospital: e.target.innerText});
+    }
+
+    checkAndSend = () => {
+        if( this.state.bloodtype == null || this.state.donor== null || this.state.recipient == null || this.state.hospital == null){
+            NotificationManager.error("Error", "Please fill in all * fields!");
         } else {
-            this.state.text = "You can donate blood."
+            //TO DO: SEND THIS STATE TO BE SOMEHOW IDK FAM
+           
+            NotificationManager.success("Sent!", "Your request has been submitted!");
+            this.clearState();
+            //notification message and clearing the form
         }
     }
 
+    clearState = () =>{
+        this.setState({bloodtype: null,
+            urgency: null,
+            recipient: null});
+        document.getElementById("DonorInput").value="";
+        document.getElementById("RecipientInput").value="";
+        document.getElementById("HospitalInput").value="";
+    }
+
+      
+    handleEligibility() {
+        if (document.getElementById('yesLabel').checked) {
+            this.setState({
+                show: true,
+                text: "Sorry! You can't donate blood.",
+                goToForm: false,
+                showQuestions: true
+            })
+        } else {
+            this.setState({
+                show: false,
+                goToForm: true,
+                showQuestions: false
+            })
+        }
+    }
+
+    renderForm() {
+        let myComp = null;
+
+        if (this.state.goToForm && !this.state.showQuestions) {
+            myComp = <div class="container bg-light">
+            <h3>Plan a Donation</h3>
+            <hr></hr>
+            <h5>Please fill in the form with the required information, then submit.</h5>
+            <h5>You will be able to choose a hospital where to donate and the date of your donation.</h5>
+            <hr></hr>
+            <div className="form-group flex">
+                <label><strong>Donor's Full Name*</strong></label>
+                <div class="form-group flex"> 
+                    <input type="text" class="form-control" id="DonorInput" placeholder="Donor Full Name" onChange={this.handleDonorChange}/>
+                </div>
+            </div>
+            <form class="form-group flex">
+                <label for="dropdownBloodType" class="mytext"><strong>Choose a Hospital*</strong></label>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownHospitalType" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {this.state.hospital} 
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownHospitalType">
+                        <a class="dropdown-item" href="#" onClick={this.handleHospitalChange}>Hospital 1</a>
+                        <a class="dropdown-item" href="#" onClick={this.handleHospitalChange}>Hospital 2</a>
+                        <a class="dropdown-item" href="#" onClick={this.handleHospitalChange}>Hospital 3</a>
+                        <a class="dropdown-item" href="#" onClick={this.handleHospitalChange}>Hospital 4</a>
+                    </div>
+                </div>
+            </form>
+            <div className="form-group flex">
+                <label><strong>Donation Date*</strong></label>
+                <DatePicker
+                        selected={this.state.donation_date}
+                        onChange={this.handleBoy}
+                        className="form-control"
+                />
+            </div>
+            <form class="form-group flex">
+                <label for="dropdownBloodType" class="mytext"><strong>Blood Type Donated*</strong></label>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownBloodType" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {this.state.bloodtype} 
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownBloodType">
+                        <a class="dropdown-item" href="#" onClick={this.handleBloodChange}>A</a>
+                        <a class="dropdown-item" href="#" onClick={this.handleBloodChange}>B</a>
+                        <a class="dropdown-item" href="#" onClick={this.handleBloodChange}>AB</a>
+                        <a class="dropdown-item" href="#" onClick={this.handleBloodChange}>O</a>
+                    </div>
+                </div>
+            </form>
+            <p></p>
+            <hr></hr>
+            <button type="button" class="btn btn-info" onClick={this.checkAndSend}>Submit</button>
+            <NotificationContainer />
+        </div>
+        } else if (this.state.showQuestions) {
+            myComp =  <div class = "container">
+            <div class = "row">
+                <div class = "col-2"></div>
+                <div class = "bg-light col-8">
+                    <h3 class = "fs-25 mb-5"> Can I be a Blood Donor?</h3>
+                    <p class = "fs-15 mb-2">Most people can give blood but sometimes it is not possible to be a blood donor. Please answer all of the following questions so that we can advise if blood donation is appropriate for you. Your responses are not recorded in any way.</p>
+                    <div class = "questions col-12 bg-questions">
+                            {questions.map(question => (
+                                 <div class = "mb-4 mt-4 p-2 bg-qst">
+                                    {Object.values(question).map((questionText) =>
+                                     <div class = "mb-4 mt-4 p-2 bg-qst">
+                                        <strong class = "fs-18 bold">{questionText}</strong>
+                                        <br></br>
+                                        <label class="radio-inline fs-18 mt-2"><input type="radio" id = "yesLabel" name={"optradio" + questionText.substr(0,1) }/>Yes</label>
+                                        <label class="radio-inline fs-18 mt-2"><input type="radio" id = "noLabel" name={"optradio" + questionText.substr(0,1) }/>No</label>
+                                        </div>
+                                    )}
+                                 </div>
+                            ))}
+                    </div>
+                    <button type="button" class="btn btn-info donation-btn" onClick={() => this.handleEligibility()}>Check your eligibility</button>
+                </div>
+                <div class = "col-2"></div>
+            </div>
+        </div>
+        }
+
+        return(
+            <div>
+                {myComp}
+            </div>
+        )
+    }
+
     render() {
+        const popup = (this.state.show ?  <Modal show={this.state.show} onHide={this.handleClose}>
+            <Modal.Header closeButton></Modal.Header>
+            <Modal.Body>
+                <h4 class="col-sm">Eligibility Result</h4>
+                <p class="col-sm"><strong>{this.state.text}</strong></p>
+            </Modal.Body>
+            <Modal.Footer>
+                <button class="btn btn-primary" onClick={this.handleClose}>Close</button>
+            </Modal.Footer>
+        </Modal> : null);
         return (
-        <div>
-            <Modal show={this.state.show} onHide={this.handleClose}>
-                <Modal.Header closeButton></Modal.Header>
-                <Modal.Body>
-                    <h4 class="col-sm">Eligibility Result</h4>
-                    <p class="col-sm"><strong>{this.state.text}</strong></p>
-                </Modal.Body>
-                <Modal.Footer>
-                    <button class="btn btn-primary" onClick={this.handleClose}>Close</button>
-                </Modal.Footer>
-            </Modal>
-                <div class = "container">
+            <div>
+                {popup}
+                {this.renderForm()}
+                {/* <div class = "container">
                     <div class = "row">
                         <div class = "col-2"></div>
                         <div class = "bg-light col-8">
@@ -82,7 +238,7 @@ class NewDonation extends Component {
                         </div>
                         <div class = "col-2"></div>
                     </div>
-                </div>
+                </div> */}
                 </div>
         );
     }

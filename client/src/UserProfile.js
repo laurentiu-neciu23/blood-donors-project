@@ -17,7 +17,8 @@ class UserProfile extends Component {
         zip: '1234',
         birth_date: new Date(),
         editingName: false,
-        editingAddress: false
+        editingAddress: false,
+        nextDonation: '22.12.2018'
       }
 
       handleBoy = (date) => {
@@ -209,6 +210,12 @@ class UserProfile extends Component {
                             <a class="dropdown-item" href="#" onClick={this.handleBloodChange}>O</a>
                         </div>
                     </div>
+                </form>
+                <p></p>
+                <hr></hr>
+                <form class="form-group flex">
+                    <label for="inputAddress">Next Donation Date</label>
+                    <div type="text" class="form-control new-donation" placeholder="22.12.2018">{this.state.nextDonation}</div>
                 </form>
                 <p></p>
                 <hr></hr>
