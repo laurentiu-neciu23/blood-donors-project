@@ -28,7 +28,8 @@ ReactDOM.render((
           <Route exact path="/donations" component={Donations} />
           <Route exact path="/analyses" component={Analyses} />
           <Route exact path="/doctor" component={DoctorDashboard} />
-          <Route exact path="/staffDashboard" component={StaffDashboard} />          
+          <Route exact path="/staffDashboard" component={StaffDashboard} />
+          <Route exact path="/dashboard" component={Main} />
 	</div>
 
     </BrowserRouter>

@@ -7,15 +7,15 @@ var Modal = require('react-bootstrap-modal');
 
 
 const questions = [
-    {text: "1. Are you under 18 years old or older than 60 years old?"},
-    {text: "2. Do you currently weigh less than 50kg?"},
-    {text: "3. Is your pulse out of 60 - 100 heartbeat/min range?"},
-    {text: "4. Did you take any surgery in the last 6 months?"},
-    {text: "5. Have you ever had any of these diseases: hepatitis B, hepatitis C, HIV, syphilis or any type of cancer?"},
-    {text: "6. Have you received a blood transfusion (except with your own blood) in the past 12 months?"},
-    {text: "7. Have you ever used injectable drugs, including anabolic steroids, unless prescribed by a physician?"},
-    {text: "8. Have you ever used intravenous illegal drugs, even once?"},
-    {text: "9. Have you traveled in the past year, or lived in the past three years, in an area where malaria is endemic?"}
+    {id:1, text: "1. Are you under 18 years old or older than 60 years old?"},
+    {id:2, text: "2. Do you currently weigh less than 50kg?"},
+    {id:3, text: "3. Is your pulse out of 60 - 100 heartbeat/min range?"},
+    {id:4, text: "4. Did you take any surgery in the last 6 months?"},
+    {id:5, text: "5. Have you ever had any of these diseases: hepatitis B, hepatitis C, HIV, syphilis or any type of cancer?"},
+    {id:6, text: "6. Have you received a blood transfusion (except with your own blood) in the past 12 months?"},
+    {id:7, text: "7. Have you ever used injectable drugs, including anabolic steroids, unless prescribed by a physician?"},
+    {id:8, text: "8. Have you ever used intravenous illegal drugs, even once?"},
+    {id:9, text: "9. Have you traveled in the past year, or lived in the past three years, in an area where malaria is endemic?"}
 ];
 
 class NewDonation extends Component {
@@ -69,7 +69,7 @@ class NewDonation extends Component {
     }
 
     checkAndSend = () => {
-        if( this.state.bloodtype == null || this.state.donor== null || this.state.recipient == null || this.state.hospital == null){
+        if( this.state.bloodtype == null || this.state.donor== null || this.state.hospital == null){
             NotificationManager.error("Error", "Please fill in all * fields!");
         } else {
             //TO DO: SEND THIS STATE TO BE SOMEHOW IDK FAM
@@ -85,19 +85,25 @@ class NewDonation extends Component {
             urgency: null,
             recipient: null});
         document.getElementById("DonorInput").value="";
-        document.getElementById("RecipientInput").value="";
-        document.getElementById("HospitalInput").value="";
     }
 
       
     handleEligibility() {
-        if (document.getElementById('yesLabel').checked) {
+        var ok = false;
+        var i;
+        for (i = 1; i <= 9; i++) { 
+            if (document.getElementById("yesLabel"+i).checked) {
+                ok = true;
+                break;
+            }
+        }
+        if(ok == true){
             this.setState({
-                show: true,
-                text: "Sorry! You can't donate blood.",
-                goToForm: false,
-                showQuestions: true
-            })
+                    show: true,
+                    text: "Sorry! You can't donate blood.",
+                    goToForm: false,
+                    showQuestions: true
+                });
         } else {
             this.setState({
                 show: false,
@@ -162,7 +168,6 @@ class NewDonation extends Component {
             <p></p>
             <hr></hr>
             <button type="button" class="btn btn-info mb-5" onClick={this.checkAndSend}>Submit</button>
-            <NotificationContainer />
         </div>
         } else if (this.state.showQuestions) {
             myComp =  <div class = "container">
@@ -172,18 +177,16 @@ class NewDonation extends Component {
                     <h3 class = "fs-25 mb-5"> Can I be a Blood Donor?</h3>
                     <p class = "fs-15 mb-2">Most people can give blood but sometimes it is not possible to be a blood donor. Please answer all of the following questions so that we can advise if blood donation is appropriate for you. Your responses are not recorded in any way.</p>
                     <div class = "questions col-12 bg-questions">
-                            {questions.map(question => (
                                  <div class = "mb-4 mt-4 p-2 bg-qst">
-                                    {Object.values(question).map((questionText) =>
+                                    {questions.map(touple =>
                                      <div class = "mb-4 mt-4 p-2 bg-qst">
-                                        <strong class = "fs-18 bold">{questionText}</strong>
+                                        <strong class = "fs-18 bold">{touple.text}</strong>
                                         <br></br>
-                                        <label class="radio-inline fs-18 mt-2"><input type="radio" id = "yesLabel" name={"optradio" + questionText.substr(0,1) }/>Yes</label>
-                                        <label class="radio-inline fs-18 mt-2"><input type="radio" id = "noLabel" name={"optradio" + questionText.substr(0,1) }/>No</label>
+                                        <label class="radio-inline fs-18 mt-2"><input type="radio" id = {"yesLabel"+touple.id} name={"optradio" + touple.text.substr(0,1) }/>Yes</label>
+                                        <label class="radio-inline fs-18 mt-2"><input type="radio" id = {"noLabel"+touple.id} name={"optradio" + touple.text.substr(0,1) }/>No</label>
                                         </div>
                                     )}
                                  </div>
-                            ))}
                     </div>
                     <button type="button" class="btn btn-info donation-btn" onClick={() => this.handleEligibility()}>Check your eligibility</button>
                 </div>
