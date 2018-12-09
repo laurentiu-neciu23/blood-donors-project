@@ -20,7 +20,9 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      visible: "login"
+      visible: "login",
+      email: "",
+      password: ""
     };
 
     this.onClickLogin = this.onClickLogin.bind(this)

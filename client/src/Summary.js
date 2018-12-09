@@ -39,7 +39,7 @@ const normalAnalysisData = {
 	Mon:"0.0 - 1.8",
 	Gran:"4.0 - 12.6",
 	RBC:"5.5 - 8.5",
-  HGB:"110 - 190 g/L",
+    HGB:"110 - 190 g/L",
 	HCT:"----------",
 	MCV:"62.0 - 72.0 fL",
 	MCH:"20.0 - 25.0 pg",
@@ -111,43 +111,25 @@ class Summary extends Component {
 		  top: e.y,
 		  left: e.x,
 		  value: d.value,
-		  key: d.data.key});
-	  }
+		  key: d.data.key
+		});
+	}
 	
-	  mouseMoveHandler(e) {
+	mouseMoveHandler(e) {
 		if (this.state.showToolTip) {
 		  this.setState({top: e.y, left: e.x});
 		}
-	  }
+	}
 	
-	  mouseOutHandler() {
+	mouseOutHandler() {
 		this.setState({showToolTip: false});
-	  }
-
-	  createTooltip() {
-		  console.log("here")
-	  }
-	
-	//    createTooltip() {
-	//  	if (this.state.showToolTip) {
-	//  	  return (
-	//  		<ToolTip
-	//  		  top={this.state.top}
-	//  		  left={this.state.left}
-	//  		>
-	//  		  The value of {this.state.key} is {this.state.value}
-	//  		</ToolTip>
-	//  	  );
-	//  	}
-	//  	return false;
-	//    }
+	}
 	  
 	handleClose() {
 		this.setState({ show: false });
 	  }
 	
 	handleShow(row) {
-		console.log("pressed ");
 		this.setState({
 			show: true,
 			anDate: row["date"],

@@ -19,16 +19,19 @@ import static com.mps.blooddonors.security.SecurityConstants.SIGN_UP_URL;
 import static com.mps.blooddonors.security.SecurityConstants.DEBUG_URL;
 
 import com.mps.blooddonors.service.UserDetailsServiceImpl;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+
 @EnableWebSecurity
 @Configuration
 @Order(1)
 public class UserPasswordWebSecurity extends WebSecurityConfigurerAdapter {
-
 
     private BCryptPasswordEncoder bCryptPasswordEncoder;
     private UserDetailsServiceImpl userDetailsServiceImpl;
@@ -38,7 +41,6 @@ public class UserPasswordWebSecurity extends WebSecurityConfigurerAdapter {
 
     @Autowired @Lazy
     private JWTAuthorizationFilter jwtAuthorizationFilter;
-
 
     public UserPasswordWebSecurity(BCryptPasswordEncoder bCryptPasswordEncoder,
                        UserDetailsServiceImpl userDetailsServiceImpl) {
@@ -54,6 +56,7 @@ public class UserPasswordWebSecurity extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, SIGN_UP_URL).permitAll()
                 .antMatchers(HttpMethod.POST, "/login/**").permitAll()
                 .antMatchers(HttpMethod.OPTIONS, "/login/**").permitAll()
+                .antMatchers(HttpMethod.OPTIONS, "/users/**").permitAll()
                 .antMatchers("/console/**").permitAll()
                 .antMatchers(HttpMethod.POST, DEBUG_URL).permitAll()
                 .anyRequest().authenticated()
@@ -69,16 +72,28 @@ public class UserPasswordWebSecurity extends WebSecurityConfigurerAdapter {
             .passwordEncoder(bCryptPasswordEncoder);
     }
 
+
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        final CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(Arrays.asList("*"));
+        configuration.setAllowedMethods(Arrays.asList("HEAD", "GET", "POST", "PUT", "DELETE", "PATCH"));
+        configuration.setAllowCredentials(true);
+        configuration.setAllowedHeaders(Arrays.asList("Origin", "Content-Type", "Accept", "Authorization"));
+        configuration.setExposedHeaders(Arrays.asList("Authorization"));
+        configuration.setMaxAge((long)3600);
+        final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
+
     @Bean
     JWTAuthenticationFilter jwtAuthenticationFilter(AuthenticationManager auth,
-                                                    FacebookUserDetailsService fbService)
-            throws Exception{
+                                                    FacebookUserDetailsService fbService) throws Exception{
         JWTAuthenticationFilter jwtAuthenticationFilter = new JWTAuthenticationFilter(auth, fbService);
         jwtAuthenticationFilter.setFilterProcessesUrl("/login/**");
         return jwtAuthenticationFilter;
     }
-
-
 
     @Bean
     JWTAuthorizationFilter jwtAuthorizationFilter(AuthenticationManager auth) throws  Exception{

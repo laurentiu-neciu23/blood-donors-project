@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
 import { NotificationManager, NotificationContainer} from "react-notifications";
 import 'react-notifications/lib/notifications.css';
+import Axios from 'axios';
 
 
 class LoginForm extends Component {
@@ -21,10 +22,10 @@ class LoginForm extends Component {
         };
         this.onEmailChange = this.onEmailChange.bind(this)
         this.onPasswordChange = this.onPasswordChange.bind(this)
+        this.handleLoginRequest = this.handleLoginRequest.bind(this)
     }
 
     onEmailChange(event) {
-      console.log(event.target.value)
       var email = event.target.value
       this.setState(
         {
@@ -35,7 +36,6 @@ class LoginForm extends Component {
     }
 
     onPasswordChange(event) {
-      console.log(event.target.value)
       var password = event.target.value
       this.setState(
         {
@@ -44,9 +44,41 @@ class LoginForm extends Component {
       )
     }
 
-    onClick() {
-      NotificationManager.error('The username or password combination is invalid.', 'Invalid Login');
+    handleLoginRequest() {
+      let baseUrl = "http://localhost:8080"
+      let signInUrl = "/login/normal"
+      let payload = {
+        email: this.state.email,
+        password: this.state.password
+      }
+      let headers = { 
+        headers: {
+          "Content-Type":"application/json",
+          "Accept": "application/json"
+        }
+      }
+
+      Axios.post(baseUrl + signInUrl, payload, headers).then(
+        (response) => {
+          console.log(response)
+          let jwtToken  = response.headers["authorization"]
+          if(jwtToken == null) {
+            NotificationManager.error("Password and email combination does not match",
+            "Login Error")
+          }else{
+            localStorage.setItem('Authorization', jwtToken)
+            window.location.reload()
+          }
+        }
+      ).catch(
+        (error) => {
+          NotificationManager.error("Password and email combination does not match",
+          "Login Error")
+        }
+      )
+
     }
+
 
     render() {
         return (
@@ -61,7 +93,7 @@ class LoginForm extends Component {
                       <label for="exampleInputPassword1">Password</label>
                       <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" onChange={this.onPasswordChange}/>
                     </div>
-                      <Button color="default" className="MuiButton-root-1 button-style confirm-button" onClick={this.onClick}>
+                      <Button color="default" className="MuiButton-root-1 button-style confirm-button" onClick={this.handleLoginRequest}>
                       Login
                     </Button>
                   </form>

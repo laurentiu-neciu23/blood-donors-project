@@ -57,7 +57,7 @@ public class FacebookUserDetailsService {
     private User createUser(String email, String firstName, String lastName, String accessToken) {
         Profile profile = new Profile();
         profile.setFirstName(firstName);
-        profile.setLastname(lastName);
+        profile.setLastName(lastName);
 
 
         User user = new User();
