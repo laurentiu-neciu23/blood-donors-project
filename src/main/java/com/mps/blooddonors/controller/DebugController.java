@@ -16,14 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/debugzone")
 public class DebugController {
 
-
     @PostMapping("/debug")
     public void debug(@RequestBody FacebookAuth facebookAuth) {
         System.out.println("[0] facebookAuth state " + facebookAuth.getState());
         System.out.println("[0] facebookAuth code " + facebookAuth.getCode());
-
-        
     }
-
-
 }

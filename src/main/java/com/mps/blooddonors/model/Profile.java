@@ -2,7 +2,11 @@ package com.mps.blooddonors.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.hibernate.validator.constraints.Length;
+
+import java.util.Date;
 
 @Entity
 @Table(name = "profiles")
@@ -26,6 +30,10 @@ public class Profile {
     @OneToOne(mappedBy = "profile")
     private User user;
 
+    @Column(name = "birth_date")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/mm/yyyy")
+    @NotNull
+    private Date birthDate;
 
     public int getId() {
         return id;
@@ -43,13 +51,6 @@ public class Profile {
         this.firstName = firstName;
     }
 
-    public String getLastMame() {
-        return lastName;
-    }
-
-    public void setLastname(String lastName) {
-        this.lastName = lastName;
-    }
 
     public User getUser() {
         return user;
@@ -57,5 +58,20 @@ public class Profile {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Date getBirthDate() {
+        return birthDate;
+    }
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 }

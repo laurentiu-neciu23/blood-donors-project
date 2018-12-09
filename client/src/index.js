@@ -17,22 +17,18 @@ import StaffDashboard from './StaffDashboard'
 ReactDOM.render((
     <BrowserRouter>
       <div>
-          <Route exact path="/" component={App} />
-          <Route exact path="/dashboard" component={Main} />
+          <Route exact={true} path="/" 
+            render={(props)=>{
+            if(localStorage.getItem("Authorization") != null ) return <Main/>;
+            else return <App/>;
+          }} />
           <Route exact path="/profile" component={UserProfile} />
           <Route exact path="/summary" component={Summary} />
           <Route exact path="/new-donation" component={NewDonation} />
           <Route exact path="/donations" component={Donations} />
           <Route exact path="/analyses" component={Analyses} />
           <Route exact path="/doctor" component={DoctorDashboard} />
-          <Route exact path="/staffDashboard" component={StaffDashboard} />
-          <Redirect render={() => (
-              localStorage.getItem("Authorization") != null ? (
-                <Redirect to="/dashboard"/>
-              ) : (
-                <App/>
-              )
-            )}/>             
+          <Route exact path="/staffDashboard" component={StaffDashboard} />          
 	</div>
 
     </BrowserRouter>
