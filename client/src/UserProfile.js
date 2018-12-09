@@ -211,6 +211,7 @@ class UserProfile extends Component {
                         </div>
                     </div>
                 </form>
+                
                 <p></p>
                 <hr></hr>
                 <form class="form-group flex">

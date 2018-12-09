@@ -214,32 +214,7 @@ class NewDonation extends Component {
             <div>
                 {popup}
                 {this.renderForm()}
-                {/* <div class = "container">
-                    <div class = "row">
-                        <div class = "col-2"></div>
-                        <div class = "bg-light col-8">
-                            <h3 class = "fs-25 mb-5"> Can I be a Blood Donor?</h3>
-                            <p class = "fs-15 mb-2">Most people can give blood but sometimes it is not possible to be a blood donor. Please answer all of the following questions so that we can advise if blood donation is appropriate for you. Your responses are not recorded in any way.</p>
-                            <div class = "questions col-12 bg-questions">
-                                    {questions.map(question => (
-                                         <div class = "mb-4 mt-4 p-2 bg-qst">
-                                            {Object.values(question).map((questionText) =>
-                                             <div class = "mb-4 mt-4 p-2 bg-qst">
-                                                <strong class = "fs-18 bold">{questionText}</strong>
-                                                <br></br>
-                                                <label class="radio-inline fs-18 mt-2"><input type="radio" id = "yesLabel" name={"optradio" + questionText.substr(0,1) }/>Yes</label>
-                                                <label class="radio-inline fs-18 mt-2"><input type="radio" id = "noLabel" name={"optradio" + questionText.substr(0,1) }/>No</label>
-                                                </div>
-                                            )}
-                                         </div>
-                                    ))}
-                            </div>
-                            <button type="button" class="btn btn-info donation-btn" onClick={() => this.handleEligibility()}>Check your eligibility</button>
-                        </div>
-                        <div class = "col-2"></div>
-                    </div>
-                </div> */}
-                </div>
+            </div>
         );
     }
 }
