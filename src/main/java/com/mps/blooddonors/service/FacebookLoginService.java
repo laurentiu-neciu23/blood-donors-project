@@ -1,7 +1,7 @@
 package com.mps.blooddonors.service;
 
-import com.mps.blooddonors.comunicator.FacebookDetailsCommunicator;
-import com.mps.blooddonors.comunicator.FacebookOAuthCommunicator;
+import com.mps.blooddonors.communicator.facebook.FacebookDetailsCommunicator;
+import com.mps.blooddonors.communicator.facebook.FacebookOAuthCommunicator;
 import com.mps.blooddonors.model.Profile;
 import com.mps.blooddonors.model.User;
 import com.mps.blooddonors.repository.ProfileRepository;
@@ -16,7 +16,7 @@ import static java.util.Collections.emptyList;
 
 
 @Service
-public class FacebookUserDetailsService {
+public class FacebookLoginService extends AbstractLoginService {
 
     @Autowired
     private UserRepository userRepository;
@@ -27,10 +27,13 @@ public class FacebookUserDetailsService {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    private static String AUTH_TYPE = "FACEBOOK";
 
-    public org.springframework.security.core.userdetails.User loadUserByFacebookAuth(FacebookAuth facebookAuth) {
+    @Override
+    public org.springframework.security.core.userdetails.User login(Object facebookAuth) {
+
         FacebookOAuthCommunicator facebookOAuthCommunicator =
-                new FacebookOAuthCommunicator(facebookAuth);
+                new FacebookOAuthCommunicator((FacebookAuth) facebookAuth);
 
         if(facebookOAuthCommunicator.isGeniuine()) {
             String accessToken = facebookOAuthCommunicator.getAuthToken();
@@ -64,6 +67,7 @@ public class FacebookUserDetailsService {
         user.setEmail(email);
         user.setProfile(profile);
         user.setFacebookAccessToken(bCryptPasswordEncoder.encode(accessToken));
+        user.setLoginMode(AUTH_TYPE);
 
         profileRepository.save(profile);
         userRepository.save(user);
@@ -73,6 +77,7 @@ public class FacebookUserDetailsService {
     private User loadUserByEmail(String email, String accessToken) {
         User user = userRepository.findByEmail(email);
         if (user != null) {
+            user.setLoginMode(AUTH_TYPE);
             user.setFacebookAccessToken(bCryptPasswordEncoder.encode(accessToken));
             userRepository.save(user);
         }
