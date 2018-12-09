@@ -187,6 +187,7 @@ class DoctorProfile extends Component {
 
     render(){
         return(
+            
             <div class="container bg-light profile-doctor">
                 <h3>Dr. {this.state.surname}'s Profile</h3>
                 <hr></hr>
