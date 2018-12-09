@@ -196,7 +196,7 @@ class UserProfile extends Component {
                 </div>
 
                 <hr></hr>
-                <form class="form-inline">
+                <form class="form-group flex">
                     <label for="dropdownBloodType" class="mytext"><strong>Blood Type </strong></label>
                     <div class="dropdown">
                         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownBloodType" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
