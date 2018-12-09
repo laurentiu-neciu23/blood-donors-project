@@ -5,3 +5,10 @@
 .body{
     font-size: 15px !important;
 }
+
+.bg-tables-req {
+    position: relative;
+    top: 50%;
+    left: 3%;
+    transform: translateY(10%);
+}

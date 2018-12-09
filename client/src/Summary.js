@@ -207,7 +207,7 @@ class Summary extends Component {
           </Modal.Footer>
         </Modal>
 
-    	<div class = "container" onMouseMove={this.handleMouseMove} >
+    	<div class = "container summ" onMouseMove={this.handleMouseMove} >
 			<div class = "row">
        	 		<div class = "col-6 bg-tables">
        				<div class = "donations bg-table">

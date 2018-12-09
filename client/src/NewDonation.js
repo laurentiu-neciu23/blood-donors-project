@@ -111,7 +111,7 @@ class NewDonation extends Component {
         let myComp = null;
 
         if (this.state.goToForm && !this.state.showQuestions) {
-            myComp = <div class="container bg-light">
+            myComp = <div class="container bg-light new-donation-form">
             <h3>Plan a Donation</h3>
             <hr></hr>
             <h5>Please fill in the form with the required information, then submit.</h5>
@@ -161,7 +161,7 @@ class NewDonation extends Component {
             </form>
             <p></p>
             <hr></hr>
-            <button type="button" class="btn btn-info" onClick={this.checkAndSend}>Submit</button>
+            <button type="button" class="btn btn-info mb-5" onClick={this.checkAndSend}>Submit</button>
             <NotificationContainer />
         </div>
         } else if (this.state.showQuestions) {

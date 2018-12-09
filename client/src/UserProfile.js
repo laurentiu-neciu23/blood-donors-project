@@ -182,7 +182,7 @@ class UserProfile extends Component {
 
     render(){
         return(
-            <div class="container bg-light">
+            <div class="container bg-light form-donation-profile">
                 <h3>{this.state.name}'s Profile</h3>
                 <hr></hr>
                 {this.renderNameForm()}
@@ -211,7 +211,7 @@ class UserProfile extends Component {
                         </div>
                     </div>
                 </form>
-                
+
                 <p></p>
                 <hr></hr>
                 <form class="form-group flex">

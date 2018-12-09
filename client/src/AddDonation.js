@@ -63,7 +63,7 @@ class AddDonation extends Component {
 
     render(){
         return(
-            <div class="container bg-light">
+            <div class="container bg-light donation">
                 <h3>Add Donation</h3>
                 <hr></hr>
                 <h5>Please fill in the form with the required information, then submit.</h5>
@@ -110,7 +110,7 @@ class AddDonation extends Component {
                 </form>
                 <p></p>
                 <hr></hr>
-                <button type="button" class="btn btn-info" onClick={this.checkAndSend}>Submit</button>
+                <button type="button" class="btn btn-info mb-4" onClick={this.checkAndSend}>Submit</button>
                 <NotificationContainer />
             </div>
         )

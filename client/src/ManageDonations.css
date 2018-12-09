@@ -1,11 +1,17 @@
-.bg-tables {
+.bg-tables-manage {
     background-color: #ecf0f1;
     margin-right: 30px;
     padding: 15px; 
+    position: relative;
+    top: 50%;
+    left: 3%;
+    transform: translateY(2%);
+    margin-bottom: 50px;
 }
 
 .bg-table {
-	background-color: #dcdde1;
+    background-color: #dcdde1;
+    margin-bottom: 10px;
 }
 
 .donations {

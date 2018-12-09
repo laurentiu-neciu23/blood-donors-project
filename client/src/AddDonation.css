@@ -14,10 +14,6 @@
     font-size: 15px !important;
 }
 
-.container {
-    height: 100%;
-}
-
 .row{
         margin-left: 0px !important;
         }
@@ -35,4 +31,9 @@ h6{
 
 .hidden{
     display: none;
+}
+
+.donation {
+    position: relative;
+    left: 4%;
 }

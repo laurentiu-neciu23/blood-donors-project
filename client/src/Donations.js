@@ -30,7 +30,7 @@ class Donations extends Component {
 		return (
         <div class = "container">
         	<div class = "row">
-       	 		<div class = "col-12 bg-tables">
+       	 		<div class = "col-12 bg-tables-donations">
        				<div class = "donations bg-table">
         				<label class = "fs-25 col-12 ">All Donations</label>
         				<div class = "table1 col-12">

@@ -57,7 +57,7 @@ class MakeRequest extends Component {
 
     render(){
         return(
-            <div class="container bg-light">
+            <div class="container bg-light make-req">
                 <h3>New Blood Request</h3>
                 <hr></hr>
                 <h5>Please fill in the form with the required information, then submit.</h5>

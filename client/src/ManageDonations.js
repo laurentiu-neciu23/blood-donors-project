@@ -31,57 +31,9 @@ class ManageDonations extends Component {
 
     render(){
         return(
-            // <div class="container bg-light">
-            //     <h3>Add Donation</h3>
-            //     <hr></hr>
-            //     <h5>Please fill in the form with the required information, then submit.</h5>
-            //     <hr></hr>
-            //     <div className="form-group flex">
-            //         <label><strong>Donor's Full Name*</strong></label>
-            //         <div class="form-group flex"> 
-            //             <input type="text" class="form-control" id="NameInput" placeholder="Donor Full Name" onChange={this.handleRecipientChange}/>
-            //         </div>
-            //     </div>
-            //     <div className="form-group flex">
-            //         <label><strong>Hospital Name*</strong></label>
-            //         <div class="form-group flex"> 
-            //             <input type="text" class="form-control" id="NameInput" placeholder="Hospital Name" onChange={this.handleRecipientChange}/>
-            //         </div>
-            //     </div>
-            //     <div className="form-group flex">
-            //         <label><strong>Donation Date*</strong></label>
-            //         <DatePicker
-            //                 selected={this.state.donation_date}
-            //                 onChange={this.handleBoy}
-            //                 className="form-control"
-            //         />
-            //     </div>
-            //     <form class="form-group flex">
-            //         <label for="dropdownBloodType" class="mytext"><strong>Blood Type Donated*</strong></label>
-            //         <div class="dropdown">
-            //             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownBloodType" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            //                 {this.state.bloodtype} 
-            //             </button>
-            //             <div class="dropdown-menu" aria-labelledby="dropdownBloodType">
-            //                 <a class="dropdown-item" href="#" onClick={this.handleBloodChange}>A</a>
-            //                 <a class="dropdown-item" href="#" onClick={this.handleBloodChange}>B</a>
-            //                 <a class="dropdown-item" href="#" onClick={this.handleBloodChange}>AB</a>
-            //                 <a class="dropdown-item" href="#" onClick={this.handleBloodChange}>O</a>
-            //             </div>
-            //         </div>
-            //     </form>
-            //     <div class="form-group">
-            //                 <label for="ComInput">Additional Comments</label>
-            //                 <textarea type="text" class="form-control" id="ComInput" placeholder="Any special requests, details or info goes here" onChange={this.handleComChange}></textarea>
-            //     </div>
-            //     <p></p>
-            //     <hr></hr>
-            //     <button type="button" class="btn btn-info" onClick={this.checkAndSend}>Submit</button>
-            //     <NotificationContainer />
-            // </div>
-            <div class = "container">
+            <div class = "container mb-2">
         	<div class = "row">
-       	 		<div class = "col-12 bg-tables">
+       	 		<div class = "col-12 bg-tables-manage">
        				<div class = "donations bg-table">
         				<label class = "fs-25 col-12 ">Manage Donations</label>
         				<div class = "table1 col-12">

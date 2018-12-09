@@ -44,3 +44,12 @@ h6{
 .new-donation {
     width: 200px;
 }
+
+.form-donation-profile {
+    position: relative;
+    left: 4%;
+}
+
+.title-user {
+    font-weight: 500px;
+}
