@@ -1,0 +1,36 @@
+* Distribuirea task-urilor *
+* 17.11.2018, 30 minute
+
+
+=== Agenda ===
+
+* Clarificarea task-urilor
+* Stabilire detalii de implementare
+* Alocarea task-urilor pentru fiecare persoana
+
+===== Participanti =====
+
+* Bardac Diana
+* Bouleanu Oana-Bianca
+* Ionescu Laurentiu Florin
+* Gogiltan Bianca
+* Mirescu Andreea Alexandra
+* Pirvan Daniel
+* Uta Iulia Alexandra
+
+===== Discutii =====
+S-au luat decizii cu privire la design-ul interfetei realizate de Daniel Pirvan si Iulia Uta.
+* Apoi am alocat task-uri fiecarei persoane:
+  - pe front end:
+    - Daniel Pirvan si Iulia Uta se vor ocupa de realizarea unui dashbord pentru useri normali, doctori si admini;
+  - pe backend
+    - Laurentiu Neciu se va ocupa de autentificare utilizatorilor
+    - Bianca Gogiltan, Laurentiu Neciu, Bianca Bouleanu - se vor ocupa realizarea modelelor, realizarea endpoint-urilor
+  - Andreea Mirescu - se va ocupa de realizarea raportului de testare
+  - Diana Bardac - se va ocupa de intocmirea documentului SDD
+
+
+===== Decizii/concluzii =====   
+
+* Clarificare tehnologii necesare pentru fiecare task
+* Realizare raport de testare
