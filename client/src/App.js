@@ -158,7 +158,7 @@ class App extends Component {
     return (
       <div className="App">
       <br></br>
-      <strong><h2 class = "app-title">Blood Donors App</h2></strong>
+      <strong><h2 class = "app-title font-weight-bold">Blood Donnors App</h2></strong>
         <div className="account-flex account-position">
           <div className="account-selection-flex account-selection-position">
             <Button color="default" className="MuiButton-root-1 button-style selection-button selection-button-left" onClick={this.onClickLogin}>

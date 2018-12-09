@@ -67,8 +67,8 @@ class StaffDashboard extends Component {
                 
                 <CSSTransition in={true} appear={true} timeout={1000} classNames="fade">
                     <div className="row-flex pannel">
-                        <div className="lds-heart-container">
-                            <div className="lds-heart">
+                        <div className="lds-heart-container1">
+                            <div className="lds-heart1">
                                 <div>
                                 </div>
                             </div>
