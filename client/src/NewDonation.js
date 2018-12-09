@@ -8,7 +8,7 @@ var Modal = require('react-bootstrap-modal');
 
 const questions = [
     {text: "1. Are you under 18 years old or older than 60 years old?"},
-    {text: "2. Do you currently weigh more than 50kg?"},
+    {text: "2. Do you currently weigh less than 50kg?"},
     {text: "3. Is your pulse out of 60 - 100 heartbeat/min range?"},
     {text: "4. Did you take any surgery in the last 6 months?"},
     {text: "5. Have you ever had any of these diseases: hepatitis B, hepatitis C, HIV, syphilis or any type of cancer?"},
