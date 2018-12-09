@@ -12,14 +12,14 @@ public class Hospital {
     @Column(name = "hospital_id")
     private int id;
 
-    @Column(name = "HospitalName")
-    private String HospitalName;
+    @Column(name = "hospital_name")
+    private String hospitalName;
 
     @OneToMany(mappedBy = "hospital")
     private List<User> users;
 
     @Column(name = "location")
-    private String Location;
+    private String location;
 
     public int getId() {
         return id;
@@ -27,10 +27,6 @@ public class Hospital {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public void setHospitalName(String hospitalName) {
-        HospitalName = hospitalName;
     }
 
     public List<User> getUsers() {
@@ -41,18 +37,19 @@ public class Hospital {
         this.users = users;
     }
 
-    public void setLocation(String location) {
-        Location = location;
+    public String getHospitalName() {
+        return hospitalName;
     }
 
-    public String getHospitalName() {
-        return HospitalName;
+    public void setHospitalName(String hospitalName) {
+        this.hospitalName = hospitalName;
     }
 
     public String getLocation() {
-        return Location;
+        return location;
     }
 
-
-
+    public void setLocation(String location) {
+        this.location = location;
+    }
 }

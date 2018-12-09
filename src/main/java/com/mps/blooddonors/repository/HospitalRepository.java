@@ -1,10 +1,8 @@
 package com.mps.blooddonors.repository;
 
-import com.mps.blooddonors.model.User;
+import com.mps.blooddonors.model.Hospital;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
-
-public interface HospitalRepository extends JpaRepository<List<User>, Long> {
-    List<User> findByHospitalName(String HospitalName);
+public interface HospitalRepository extends JpaRepository<Hospital, Long> {
+    Hospital findByHospitalName(String hospitalName);
 }

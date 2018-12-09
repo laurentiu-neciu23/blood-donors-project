@@ -6,11 +6,11 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "donationRequest")
+@Table(name = "donation_request")
 public class DonationRequest {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "donationRequest_id")
+    @Column(name = "id")
     private int id;
 
     @Column(name = "first_name")
@@ -23,17 +23,21 @@ public class DonationRequest {
     @NotNull
     private String lastName;
 
-    @OneToOne(mappedBy = "donationRequest")
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
-    @Column(name = "blood_Quantity")
-    private Integer bloodQuantity;
+    @Column(name = "quantity")
+    private Integer quantity;
 
     @Column(name = "location")
     private String location;
 
     @Column(name = "blood_type")
     private String bloodType;
+
+    @Column(name = "rh_type")
+    private String rhType;
 
     public int getId() {
         return id;
@@ -67,14 +71,6 @@ public class DonationRequest {
         this.user = user;
     }
 
-    public Integer getBloodQuantity() {
-        return bloodQuantity;
-    }
-
-    public void setBloodQuantity(Integer bloodQuantity) {
-        this.bloodQuantity = bloodQuantity;
-    }
-
     public String getLocation() {
         return location;
     }
@@ -91,4 +87,11 @@ public class DonationRequest {
         this.bloodType = bloodType;
     }
 
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
 }

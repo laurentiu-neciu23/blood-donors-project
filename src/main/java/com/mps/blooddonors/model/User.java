@@ -1,6 +1,7 @@
 package com.mps.blooddonors.model;
 
 import org.hibernate.validator.constraints.Length;
+import org.springframework.hateoas.client.Hop;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -19,6 +20,10 @@ public class User {
     @Email(message = "Please provide a valid email!")
     @NotEmpty(message = "You must provde an email!")
     private String email;
+
+    @ManyToOne
+    @JoinColumn(name = "hospital_id")
+    private Hospital hospital;
 
     @Column(name = "password")
     private String password;
@@ -77,5 +82,13 @@ public class User {
 
     public void setFacebookAccessToken(String facebookAccessToken) {
         this.facebookAccessToken = facebookAccessToken;
+    }
+
+    public Hospital getHospital() {
+        return hospital;
+    }
+
+    public void setHospital(Hospital hospital) {
+        this.hospital = hospital;
     }
 }

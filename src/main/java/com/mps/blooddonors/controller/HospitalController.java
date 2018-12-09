@@ -2,15 +2,12 @@ package com.mps.blooddonors.controller;
 
 import com.mps.blooddonors.model.User;
 import com.mps.blooddonors.repository.HospitalRepository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/hospital")
+@RequestMapping("/hospitals")
 public class HospitalController {
     private HospitalRepository hospitalRepository;
 
@@ -18,8 +15,8 @@ public class HospitalController {
         this.hospitalRepository = hospitalRepository;
     }
 
-    @GetMapping("/getUsers")
-    public List<User> getByHospitalName(@RequestBody String hospitalName) {
-        return hospitalRepository.findByHospitalName(hospitalName);
+    @GetMapping("/users")
+    public List<User> getByHospitalName(@RequestParam("name") String hospitalName) {
+        return hospitalRepository.findByHospitalName(hospitalName).getUsers();
     }
 }
