@@ -23,7 +23,6 @@ public class Profile {
     @NotNull
     private String lastName;
 
-
     @OneToOne(mappedBy = "profile")
     private User user;
 
