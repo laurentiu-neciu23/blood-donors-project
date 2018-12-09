@@ -5,6 +5,17 @@ input:-webkit-autofill {
   -webkit-box-shadow: 0 0 0px 1000px white inset;
 }
 
+.app-title {
+  font-size: 50px;
+  text-align: center;
+  font-weight: 900px;
+  color: white;
+}
+
+.fs-20 {
+  font-size: 10px;
+}
+
 .account-position {
   position: absolute;
   top: 20%;

@@ -112,6 +112,8 @@ class App extends Component {
 
     return (
       <div className="App">
+      <br></br>
+      <strong><h2 class = "app-title">Blood Donors App</h2></strong>
         <div className="account-flex account-position">
           <div className="account-selection-flex account-selection-position">
             <Button color="default" className="MuiButton-root-1 button-style selection-button selection-button-left" onClick={this.onClickLogin}>
@@ -156,7 +158,14 @@ class App extends Component {
             </div>
 
             <Typography className="presentation-text">
-              Lorem Ipsum este pur şi simplu o machetă pentru text a industriei tipografice. Lorem Ipsum a fost macheta standard a industriei încă din secolul al XVI-lea, când un tipograf anonim a luat o planşetă de litere şi le-a amestecat pentru a crea o carte demonstrativă pentru literele respective. Nu doar că a supravieţuit timp de cinci secole, dar şi a facut saltul în tipografia electronică practic neschimbată. A fost popularizată în anii '60 odată cu ieşirea colilor Letraset care conţineau pasaje Lorem Ipsum, iar mai recent, prin programele de publicare pentru calculator, ca Aldus PageMaker care includeau versiuni de Lorem Ipsum.
+           <h5 class = "mt-5">Welcome to Blood Donors Project!</h5>
+
+            <p class = "fs-20 my-5">Once registered, take a test to see whether you are eligible to make a blood donation. 
+            This app allows you to schedule your next blood donation appointment.
+            You can also see your blood test results and the status of your donations online!
+            Medics and Medical Staff from all around the country are also here to help you.</p>
+
+           <h5> Be our hero. Save a life now! </h5>
             </Typography>
 
           </div>
