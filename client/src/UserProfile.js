@@ -2,9 +2,7 @@ import React, { Component } from 'react'
 import './UserProfile.css'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import Axios from "axios"
-import {NotificationManager, NotificationContainer} from 'react-notifications'
-import dateFormat from "dateformat"
+
 
 class UserProfile extends Component {
 
@@ -65,7 +63,6 @@ class UserProfile extends Component {
         })
     }
 
-
     handleNameChange = () => {
         var formInfo = {
             firstName: document.getElementById("NameInput").value,
@@ -88,10 +85,12 @@ class UserProfile extends Component {
     }
 
     toggleEditName = () =>{
+        console.log("got here tho")
         this.setState({editingName: !this.state.editingName});
     }
 
     toggleEditAddress = () =>{
+        console.log("got here tho")
         this.setState({editingAddress: !this.state.editingAddress});
     }
 
@@ -105,21 +104,12 @@ class UserProfile extends Component {
     }
 
     saveEditsInfo = () => {
-        var formInfo = {
+        this.setState({
             address: document.getElementById("inputAddress").value,
             city: document.getElementById("inputCity").value,
             county: document.getElementById("inputCounty").value,
-            postalCode: document.getElementById("inputZip").value
-        }
-
-        for(var key in formInfo) {
-            if(formInfo[key] == "") {
-                NotificationManager.error("Please complete all values before saving", "Failure")
-                return
-            }
-        }
-
-        this.setState(formInfo, this.saveToRemote)
+            zip: document.getElementById("inputZip").value
+        })
         this.toggleEditAddress();
     }
     
@@ -131,12 +121,12 @@ class UserProfile extends Component {
                 
                 <label for="formGroupExampleInput" class="mytext"><strong>Name  </strong></label>
                 <div class="form-group"> 
-                    <div type="text" class="form-control-plaintext" id="formGroupExampleInput">{this.state.firstName}</div>
+                    <div type="text" class="form-control-plaintext" id="formGroupExampleInput">{this.state.name}</div>
                 </div>
                 
                 <label for="formGroupExampleInput2" class="mytext"><strong>Surname  </strong></label>
                 <div class="form-group">
-                    <div type="text" class="form-control-plaintext" id="formGroupExampleInput2">{this.state.lastName}</div>
+                    <div type="text" class="form-control-plaintext" id="formGroupExampleInput2">{this.state.surname}</div>
                 </div>
                 <button type="button" class="btn btn-link" onClick={this.toggleEditName}>Edit</button>
             </form>
@@ -147,12 +137,12 @@ class UserProfile extends Component {
                 
                 <label for="NameInput" class="mytext"><strong>Name  </strong></label>
                 <div class="form-group"> 
-                    <input type="text" class="form-control" id="NameInput" defaultValue={this.state.firstName}/>
+                    <input type="text" class="form-control" id="NameInput" defaultValue={this.state.name}/>
                 </div>
                 
                 <label for="SurnameInput" class="mytext"><strong>Surname  </strong></label>
                 <div class="form-group">
-                    <input type="text" class="form-control" id="SurnameInput" defaultValue={this.state.lastName}/>
+                    <input type="text" class="form-control" id="SurnameInput" defaultValue={this.state.surname}/>
                 </div>
                 <button type="button" class="btn close" aria-label="Close" onClick={this.toggleEditName}>
                     <span aria-hidden="true">&times;</span>
@@ -198,7 +188,7 @@ class UserProfile extends Component {
                         
                         <div class="form-group col-md-4">
                             <label for="inputZip">Postal Code</label>
-                            <input type="text" class="form-control" id="inputZip" defaultValue={this.state.postalCode}></input>
+                            <input type="text" class="form-control" id="inputZip" defaultValue={this.state.zip}></input>
                         </div>
                     </div>   
                 </div>

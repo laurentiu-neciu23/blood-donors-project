@@ -58,7 +58,7 @@ class Donations extends Component {
 		return (
         <div class = "container">
         	<div class = "row">
-       	 		<div class = "col-12 bg-tables">
+       	 		<div class = "col-12 bg-tables-req">
        				<div class = "donations bg-table">
         				<label class = "fs-25 col-12 ">Blood Requests</label>
 

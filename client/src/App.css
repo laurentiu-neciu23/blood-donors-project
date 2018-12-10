@@ -9,7 +9,8 @@ input:-webkit-autofill {
   font-size: 50px;
   text-align: center;
   font-weight: 900px;
-  color: white;
+  color: #27c7d0;
+  text-shadow: -3px -1px 0px #daaba4;
 }
 
 .fs-20 {
@@ -37,7 +38,7 @@ input:-webkit-autofill {
   flex-direction: column;
   flex-wrap: nowrap;
   display: flex;
-  background-color: rgba(235, 234, 245, 0.9);
+  background-color: #e5feff;
   border-radius: 5%;
   box-shadow: 1px 0px 0px 0px;
   border: 1px solid;
@@ -107,7 +108,7 @@ input:-webkit-autofill {
 }
 
 .MuiButton-root-1.button-style {
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(39, 199, 208);
 }
 
 .MuiButton-root-1.button-style:hover {
@@ -149,7 +150,7 @@ input:-webkit-autofill {
   animation: spinner 2.5s cubic-bezier(0.75, 0, 0.5, 1) infinite normal;
   width: 1em;
   height: 1em;
-  background-color: red;
+  background-color: #ff806b;
 }
 .spinner:after {
   animation: shadow 2.5s cubic-bezier(0.75, 0, 0.5, 1) infinite normal;

@@ -3,14 +3,28 @@
     background-color: #ecf0f1;
     margin-right: 30px;
     padding: 15px; 
+    position: relative;
+    top: 50%;
+    transform: translateY(10%);
+}
+
+.summ {
+    margin-left: 70px;
+}
+
+.container {
+    width: 5000px;
 }
 
 .bg-table {
-	background-color: #dcdde1;
+    background-color: #dcdde1;
 }
 
 .bg-chart {
-	background-color: #dfe6e9;
+    background-color: #dfe6e9;
+    position: relative;
+    top: 50%;
+    transform: translateY(10%);
 }
 
 .donations {

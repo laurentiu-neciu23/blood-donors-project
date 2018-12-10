@@ -68,8 +68,8 @@ class DoctorDashboard extends Component {
                 
                 <CSSTransition in={true} appear={true} timeout={1000} classNames="fade">
                     <div className="row-flex pannel">
-                        <div className="lds-heart-container">
-                            <div className="lds-heart">
+                        <div className="lds-heart-container2">
+                            <div className="lds-heart2">
                                 <div>
                                 </div>
                             </div>

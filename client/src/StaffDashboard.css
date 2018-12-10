@@ -66,7 +66,7 @@
       background-color: rgb(23, 162, 184);
       transform: translateX(5px)
   }
-  .lds-heart-container {
+  .lds-heart-container1 {
     display: flex;
     flex-direction: row;
     flex-flow: row;
@@ -76,17 +76,17 @@
   }
   
   
-  .lds-heart {
+  .lds-heart1 {
       transform: rotate(45deg);
   }
   
-  .lds-heart div {
+  .lds-heart1 div {
     width: 26px;
     height: 26px;
     background:#28a745  !important;
     animation: lds-heart 1.2s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
   }
-  .lds-heart div:after{
+  .lds-heart1 div:after{
     content: " ";
     position: absolute;
     display: block;
@@ -94,7 +94,7 @@
     height: 26px;
     background:#b7ff57;
   }
-  .lds-heart div:before {
+  .lds-heart1 div:before {
     content: " ";
     position: absolute;
     display: block;
@@ -102,15 +102,15 @@
     height: 26px;
     background:#177530;
   }
-  .lds-heart div:before {
+  .lds-heart1 div:before {
     left: -17px;
     border-radius: 50% 0 0 50%;
   }
-  .lds-heart div:after {
+  .lds-heart1 div:after {
     top: -17px;
     border-radius: 50% 50% 0 0;
   }
-  @keyframes lds-heart {
+  @keyframes lds-heart1 {
     0% {
       transform: scale(0.95);
     }

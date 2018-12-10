@@ -116,7 +116,7 @@ class Analyses extends Component {
 
         <div class = "container">
         	<div class = "row">
-       	 		<div class = "col-12 bg-tables">
+       	 		<div class = "col-12 bg-tables-analyses">
                     <div class = "analyses bg-table">
 					<label class = "fs-25 col-12">All Analyses</label>
 					<div class = "table1 col-12">

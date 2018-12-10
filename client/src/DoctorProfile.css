@@ -39,3 +39,9 @@ h6{
 .hidden{
     display: none;
 }
+
+
+.profile-doctor {
+    position: relative;
+    left: 4%;
+}
