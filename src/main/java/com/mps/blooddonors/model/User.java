@@ -1,5 +1,7 @@
 package com.mps.blooddonors.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.mps.blooddonors.validator.Authenticable;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.hateoas.client.Hop;
 
@@ -9,12 +11,32 @@ import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "users")
+@Authenticable(password = "password", authTokens = {"facebookAccessToken", "googleAccessToken"},
+        message = "The password must have a minimum of 6 characters to continue.",
+        adminTouchPropertyName = "adminTouched",
+        passwordSize = 8)
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "user_id")  
     private int id;
+
+    @JsonIgnore
+    @Column(name = "admin_touched")
+    private boolean adminTouched;
+
+    @Column(name = "password_digest")
+    private String passwordDigest;
+
+    @Column(name = "facebook_access_token")
+    private String facebookAccessToken;
+
+    @Column(name = "google_access_token")
+    private String googleAccessToken;
+
+    @Column(name = "login_mode")
+    private String loginMode;
 
     @Column(name = "email", unique=true)
     @Email(message = "Please provide a valid email!")
@@ -25,11 +47,8 @@ public class User {
     @JoinColumn(name = "hospital_id")
     private Hospital hospital;
 
-    @Column(name = "password")
+    @Transient
     private String password;
-
-    @Column(name = "facebook_access_token")
-    private String facebookAccessToken;
 
     @ManyToOne
     @JoinColumn(name="role_id")
@@ -91,4 +110,37 @@ public class User {
     public void setHospital(Hospital hospital) {
         this.hospital = hospital;
     }
+
+    public String getGoogleAccessToken() {
+        return googleAccessToken;
+    }
+
+    public void setGoogleAccessToken(String googleAccessToken) {
+        this.googleAccessToken = googleAccessToken;
+    }
+
+    public String getLoginMode() {
+        return loginMode;
+    }
+
+    public void setLoginMode(String loginMode) {
+        this.loginMode = loginMode;
+    }
+
+    public String getPasswordDigest() {
+        return passwordDigest;
+    }
+
+    public void setPasswordDigest(String passwordDigest) {
+        this.passwordDigest = passwordDigest;
+    }
+
+    public void toggleAdminTouched() {
+        this.adminTouched = true;
+    }
+
+    public boolean isAdminTouched() {
+        return adminTouched;
+    }
+
 }

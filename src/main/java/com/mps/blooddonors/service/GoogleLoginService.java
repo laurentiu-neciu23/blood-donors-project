@@ -62,7 +62,7 @@ public class GoogleLoginService extends AbstractLoginService{
     private com.mps.blooddonors.model.User createUser(String email, String firstName, String lastName, String accessToken) {
         Profile profile = new Profile();
         profile.setFirstName(firstName);
-        profile.setLastname(lastName);
+        profile.setLastName(lastName);
 
 
         com.mps.blooddonors.model.User user = new com.mps.blooddonors.model.User();

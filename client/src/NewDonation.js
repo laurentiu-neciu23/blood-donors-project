@@ -20,7 +20,7 @@ const questions = [
 
 class NewDonation extends Component {
     constructor(props) {
-		super(props);
+        super(props);
 		this.state = {
             show: false,
             text: "placeholder",
@@ -72,11 +72,8 @@ class NewDonation extends Component {
         if( this.state.bloodtype == null || this.state.donor== null || this.state.recipient == null || this.state.hospital == null){
             NotificationManager.error("Error", "Please fill in all * fields!");
         } else {
-            //TO DO: SEND THIS STATE TO BE SOMEHOW IDK FAM
-           
             NotificationManager.success("Sent!", "Your request has been submitted!");
             this.clearState();
-            //notification message and clearing the form
         }
     }
 

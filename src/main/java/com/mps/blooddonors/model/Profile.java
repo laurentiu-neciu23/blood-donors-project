@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.Length;
 
 import java.util.Date;
@@ -27,6 +28,26 @@ public class Profile {
     @NotNull
     private String lastName;
 
+    @Column(name = "city")
+    private String city;
+
+    @Column(name = "county")
+    private String county;
+
+    @Column(name = "address")
+    private String address;
+
+    @Column(name = "blood_type")
+    private String bloodType;
+
+    @Column(name = "postal_code")
+    private String postalCode;
+
+    @Column(name = "last_donation_date")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/mm/yyyy")
+    private Date lastDonationDate;
+
+    @JsonIgnore
     @OneToOne(mappedBy = "profile")
     private User user;
 
@@ -34,6 +55,9 @@ public class Profile {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/mm/yyyy")
     @NotNull
     private Date birthDate;
+
+    public Profile() {
+    }
 
     public int getId() {
         return id;
@@ -73,5 +97,55 @@ public class Profile {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+
+    public String getBloodType() {
+        return bloodType;
+    }
+
+    public void setBloodType(String bloodType) {
+        this.bloodType = bloodType;
+    }
+
+
+    public Date getLastDonationDate() {
+        return lastDonationDate;
+    }
+
+    public void setLastDonationDate(Date lastDonationDate) {
+        this.lastDonationDate = lastDonationDate;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
+    }
+
+    public String getCounty() {
+        return county;
+    }
+
+    public void setCounty(String county) {
+        this.county = county;
     }
 }

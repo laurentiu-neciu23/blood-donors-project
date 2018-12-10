@@ -2,61 +2,124 @@ import React, { Component } from 'react'
 import './UserProfile.css'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-
+import Axios from "axios"
+import {NotificationManager, NotificationContainer} from 'react-notifications'
+import dateFormat from "dateformat"
 
 class UserProfile extends Component {
 
-    state = {
-        name: 'Name',
-        surname: 'Surname',
-        birthday: null,
-        bloodtype: 'N/A',
-        address: '1234 Main St',
-        city: 'Adunatii Copaceni',
-        county: 'Teleorman',
-        zip: '1234',
-        birth_date: new Date(),
-        editingName: false,
-        editingAddress: false,
-        nextDonation: '22.12.2018'
-      }
+    constructor(props, context) {
 
-      handleBoy = (date) => {
-        this.setState({
-            birth_date: date
+        super(props, context)
+        this.state = {
+            id: props.id,
+            city: props.city,
+            county: props.county,
+            address: props.address,
+            postalCode: props.postalCode,
+            firstName: props.firstName,
+            lastName: props.lastName,
+            birthDate: props.birthDate,
+            bloodType: props.bloodType,
+            lastDonationDate: props.lastDonationDate,
+            editingName: false,
+            editingAddress: false
+
+        }
+        this.request = props.request
+        this.nextDonation = this.nextDonation.bind(this)
+        this.saveToRemote = this.saveToRemote.bind(this)
+        this.saveEditsInfo = this.saveEditsInfo.bind(this)
+    }
+
+
+    saveToRemote = () => {
+        let baseUrl = "http://localhost:8080"
+        let endPoint = "/profiles/edit"
+        let headers = {
+            headers: {
+                Authorization: localStorage.getItem('Authorization'),
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            }
+        }
+        let javaJacksonKeys = ["id", "address", "county", "city", "firstName",
+                                "lastName", "postalCode", "birthDate",
+                               "bloodType", "lastDonationDate"]
+
+
+        var payload = javaJacksonKeys.reduce((resultant, current) => {
+            resultant[current] = this.state[current]; 
+            return resultant;}, 
+        {})
+        
+        Axios.post(baseUrl + endPoint, payload, headers)
+        .then((response) => {
+            NotificationManager.success("Profile successfuly updated.", "Success")
+            this.request()
+
+        })
+        .catch((error) =>
+        {
+            console.log(error)
         })
     }
 
+
     handleNameChange = () => {
-        this.setState({
-            name: document.getElementById("NameInput").value,
-            surname: document.getElementById("SurnameInput").value
-        })
+        var formInfo = {
+            firstName: document.getElementById("NameInput").value,
+            lastName: document.getElementById("SurnameInput").value
+        }
+
+        for(var key in formInfo) {
+            if(formInfo[key] == null) {
+                NotificationManager.error("Names are required", "Error")
+                return
+            }
+        }
+
+        this.setState(formInfo, this.saveToRemote)
         this.toggleEditName();
     }
 
     handleBloodChange = (e) => {
-        this.setState({
-            bloodtype: e.target.innerText});
+        this.setState({bloodType: e.target.innerText}, this.saveToRemote);
     }
 
     toggleEditName = () =>{
-        console.log("got here tho")
         this.setState({editingName: !this.state.editingName});
     }
 
     toggleEditAddress = () =>{
-        console.log("got here tho")
         this.setState({editingAddress: !this.state.editingAddress});
     }
 
+    nextDonation = (date) => {
+            if (date.getMonth() == 11) {
+                var nextDonationDate = new Date(date.getFullYear() + 1, 0, 1);
+            } else {
+                var nextDonationDate = new Date(date.getFullYear(), date.getMonth() + 1, 1);
+           }
+           return dateFormat(this.nextDonation, "dd/mm/yyyy")
+    }
+
     saveEditsInfo = () => {
-        this.setState({
+        var formInfo = {
             address: document.getElementById("inputAddress").value,
             city: document.getElementById("inputCity").value,
             county: document.getElementById("inputCounty").value,
-            zip: document.getElementById("inputZip").value
-        })
+            postalCode: document.getElementById("inputZip").value
+        }
+
+        for(var key in formInfo) {
+            if(formInfo[key] == "") {
+                NotificationManager.error("Please complete all values before saving", "Failure")
+                return
+            }
+        }
+
+        this.setState(formInfo, this.saveToRemote)
         this.toggleEditAddress();
     }
     
@@ -68,12 +131,12 @@ class UserProfile extends Component {
                 
                 <label for="formGroupExampleInput" class="mytext"><strong>Name  </strong></label>
                 <div class="form-group"> 
-                    <div type="text" class="form-control-plaintext" id="formGroupExampleInput">{this.state.name}</div>
+                    <div type="text" class="form-control-plaintext" id="formGroupExampleInput">{this.state.firstName}</div>
                 </div>
                 
                 <label for="formGroupExampleInput2" class="mytext"><strong>Surname  </strong></label>
                 <div class="form-group">
-                    <div type="text" class="form-control-plaintext" id="formGroupExampleInput2">{this.state.surname}</div>
+                    <div type="text" class="form-control-plaintext" id="formGroupExampleInput2">{this.state.lastName}</div>
                 </div>
                 <button type="button" class="btn btn-link" onClick={this.toggleEditName}>Edit</button>
             </form>
@@ -84,12 +147,12 @@ class UserProfile extends Component {
                 
                 <label for="NameInput" class="mytext"><strong>Name  </strong></label>
                 <div class="form-group"> 
-                    <input type="text" class="form-control" id="NameInput" defaultValue={this.state.name}/>
+                    <input type="text" class="form-control" id="NameInput" defaultValue={this.state.firstName}/>
                 </div>
                 
                 <label for="SurnameInput" class="mytext"><strong>Surname  </strong></label>
                 <div class="form-group">
-                    <input type="text" class="form-control" id="SurnameInput" defaultValue={this.state.surname}/>
+                    <input type="text" class="form-control" id="SurnameInput" defaultValue={this.state.lastName}/>
                 </div>
                 <button type="button" class="btn close" aria-label="Close" onClick={this.toggleEditName}>
                     <span aria-hidden="true">&times;</span>
@@ -135,7 +198,7 @@ class UserProfile extends Component {
                         
                         <div class="form-group col-md-4">
                             <label for="inputZip">Postal Code</label>
-                            <input type="text" class="form-control" id="inputZip" defaultValue={this.state.zip}></input>
+                            <input type="text" class="form-control" id="inputZip" defaultValue={this.state.postalCode}></input>
                         </div>
                     </div>   
                 </div>
@@ -151,22 +214,23 @@ class UserProfile extends Component {
                     <div class="form-row">
                         <div class="form-group">
                             <label for="inputAddress">Address</label>
-                            <div type="text" class="form-control" placeholder="1234 Main St">{this.state.address}</div>
+                            <div type="text" class="form-control">{this.state.address == null? "Enter your address" : this.state.address}</div>
                         </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="inputCity">City</label>
-                            <div type="text" class="form-control">{this.state.city}</div>
+                            <div type="text" class="form-control">{this.state.city == null? "Enter your city" : this.state.city}</div>
                         </div>
                         
                         <div class="form-group col-md-4">
                             <label for="inputCounty">County</label>
-                            <div type="text" class="form-control">{this.state.county}</div>
+                            <div type="text" class="form-control">{this.state.county == null? "Enter your county": this.state.county}</div>
                         </div>
                         
                         <div class="form-group">
                             <label for="inputZip">Postal Code</label>
-                            <div type="text" class="form-control">{this.state.zip}</div>
+                            <div type="text" class="form-control">{this.state.postalCode == null ? 
+                                                                    "Enter Postal Code" : this.state.postalCode}</div>
                         </div>
                     </div>   
                 </div>
@@ -183,17 +247,13 @@ class UserProfile extends Component {
     render(){
         return(
             <div class="container bg-light">
-                <h3>{this.state.name}'s Profile</h3>
+                <h3>{this.state.firstName}'s Profile</h3>
                 <hr></hr>
                 {this.renderNameForm()}
                 <hr></hr>
                 <div className="form-group flex">
                     <label><strong>Birth Date</strong></label>
-                    <DatePicker
-                            selected={this.state.birth_date}
-                            onChange={this.handleBoy}
-                            className="form-control"
-                    />
+                    <div type="text" className="form-control new-donation" >{this.state.birthDate}</div>
                 </div>
 
                 <hr></hr>
@@ -201,7 +261,7 @@ class UserProfile extends Component {
                     <label for="dropdownBloodType" class="mytext"><strong>Blood Type </strong></label>
                     <div class="dropdown">
                         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownBloodType" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            {this.state.bloodtype} 
+                            {this.state.bloodType == null? "Choose your blood type" : this.state.bloodType} 
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownBloodType">
                             <a class="dropdown-item" href="#" onClick={this.handleBloodChange}>A</a>
@@ -216,11 +276,12 @@ class UserProfile extends Component {
                 <hr></hr>
                 <form class="form-group flex">
                     <label for="inputAddress">Next Donation Date</label>
-                    <div type="text" class="form-control new-donation" placeholder="22.12.2018">{this.state.nextDonation}</div>
+                    <div type="text" className="form-control new-donation" >{this.state.nextDonation == null? dateFormat(Date.now(), "dd/mm/yyyy") : this.nextDonation(this.lastDonationDate)}</div>
                 </form>
                 <p></p>
                 <hr></hr>
                 {this.renderAdddressForm()}
+                <NotificationContainer />
             </div>
 
         )

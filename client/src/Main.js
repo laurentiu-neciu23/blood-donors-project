@@ -9,6 +9,7 @@ import Summary from './Summary';
 import NewDonation from './NewDonation';
 import Donations from './Donations';
 import Analyses from './Analyses';
+import Axios from 'axios'
 
 
 class Main extends Component {
@@ -16,13 +17,42 @@ class Main extends Component {
     constructor(props) {
       super(props);
       this.state = {
-        numeleMeu: "Despacito",
         toShow: "summary"
       };
+      this.request = this.request.bind(this)
+    }
+
+    componentWillMount() {
+        if(localStorage.getItem('Authorization') == null) {
+            window.location.reload()
+        }
+    }
+
+    request() {
+        let baseUrl = "http://localhost:8080"
+        let endPoint = "/profiles/me"
+        let headers = {
+            headers: {
+                Authorization: localStorage.getItem('Authorization'),
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            }
+        }
+    
+        Axios.get(baseUrl + endPoint, headers)
+        .then((response) => {
+            this.setState(response.data)
+            console.log(this.state)
+        })
+        .catch((error) =>
+        {
+            console.log(error)
+        })
     }
 
     componentDidMount() {
         NotificationManager.success("Success", "You have successfully logged in!");
+        this.request()
     }
 
     handleShow = (_toShow) => {
@@ -35,7 +65,17 @@ class Main extends Component {
             myComp = <Summary/>
         }
         else if(this.state.toShow == "profile") {
-            myComp = <UserProfile/>
+            myComp = <UserProfile firstName={this.state.firstName} 
+                                  lastName={this.state.lastName}
+                                  birthDate={this.state.birthDate}
+                                  county={this.state.county}
+                                  city={this.state.city}
+                                  address={this.state.address}
+                                  postalCode={this.state.postalCode}
+                                  bloodType={this.state.bloodType}
+                                  lastDonationDate={this.state.lastDonationDate}
+                                  id={this.state.id}
+                                  request={this.request}/>
         }
         else if(this.state.toShow == "analyses") {
             myComp = <Analyses/>

@@ -28,7 +28,7 @@ public class UserService {
         Profile transientProfile  = user.getProfile();
         if(transientProfile != null) {
             profileRepository.save(transientProfile);
-            user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+            user.setPasswordDigest(bCryptPasswordEncoder.encode(user.getPassword()));
             userRepository.save(user);
         } else {
             throw new SecurityException("Cannot save user without profile");

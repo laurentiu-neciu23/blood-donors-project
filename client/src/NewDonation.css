@@ -33,3 +33,7 @@
 .modal{
     display: block;
 }
+
+.container{
+    overflow: scroll;
+}

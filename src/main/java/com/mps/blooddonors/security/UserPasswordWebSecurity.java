@@ -1,6 +1,5 @@
 package com.mps.blooddonors.security;
 
-import com.mps.blooddonors.service.FacebookUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
@@ -87,10 +86,10 @@ public class UserPasswordWebSecurity extends WebSecurityConfigurerAdapter {
         return source;
     }
 
+
     @Bean
-    JWTAuthenticationFilter jwtAuthenticationFilter(AuthenticationManager auth,
-                                                    FacebookUserDetailsService fbService) throws Exception{
-        JWTAuthenticationFilter jwtAuthenticationFilter = new JWTAuthenticationFilter(auth, fbService);
+    JWTAuthenticationFilter jwtAuthenticationFilter(AuthenticationManager auth){
+        JWTAuthenticationFilter jwtAuthenticationFilter = new JWTAuthenticationFilter(auth);
         jwtAuthenticationFilter.setFilterProcessesUrl("/login/**");
         return jwtAuthenticationFilter;
     }

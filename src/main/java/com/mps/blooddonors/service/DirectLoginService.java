@@ -21,6 +21,9 @@ public class DirectLoginService extends AbstractLoginService {
     public User login(Object o) {
         com.mps.blooddonors.model.User user = (com.mps.blooddonors.model.User) o;
         if(setUserLoginMode(user) != null) {
+            System.out.println("Internal email: " + user.getEmail());
+            System.out.println("Internal password: " + user.getPassword());
+
             return new User(user.getEmail(), user.getPassword(), Collections.emptyList());
         }
         return null;
@@ -32,7 +35,6 @@ public class DirectLoginService extends AbstractLoginService {
         if(user != null) {
             user.setLoginMode(AUTH_MODE);
             user.toggleAdminTouched();
-            System.out.println(user.isAdminTouched());
             userRepository.save(user);
         }
         return user;

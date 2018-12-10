@@ -9,7 +9,7 @@ import com.mps.blooddonors.serializers.FacebookAuth;
 
 public class FacebookOAuthCommunicator {
 
-    final static String baseOauthUrl = "https://graph.facebook.com/v3.2/oauth/access_token?";
+    private final static String baseOauthUrl = "https://graph.facebook.com/v3.2/oauth/access_token?";
     private String authToken;
     private FacebookAuth facebookAuth;
 
@@ -19,10 +19,7 @@ public class FacebookOAuthCommunicator {
     }
 
     public boolean isGeniuine() {
-        if(this.authToken == null) {
-            return false;
-        }
-        return true;
+        return this.authToken != null;
     }
 
     public String getAuthToken() {
@@ -38,8 +35,7 @@ public class FacebookOAuthCommunicator {
                     .header("content-type", "application/json")
                     .asJson();
             JsonNode jsonRoot = response.getBody();
-            String accessToken = jsonRoot.getObject().getString("access_token");
-            return accessToken;
+            return jsonRoot.getObject().getString("access_token");
 
         } catch (UnirestException e) {
             return null;
@@ -47,13 +43,12 @@ public class FacebookOAuthCommunicator {
     }
 
     private String fetchUrlOAuthEndpoint() {
-        String urlOAuthEndpoint = baseOauthUrl
+
+        return baseOauthUrl
                 + "client_id=" + SecurityConstants.CLIENT_ID
                 + "&redirect_uri=" + SecurityConstants.FRONTEND_HOST
                 + "&client_secret=" + SecurityConstants.SECRET_FACEBOOK_ID
                 + "&code=" + facebookAuth.getCode();
-
-        return urlOAuthEndpoint;
     }
 
 }
